@@ -35,7 +35,10 @@ public class MoveEnemy : MonoBehaviour
                 // 3.a 
                 currentWaypoint++;
                 lastWaypointSwitchTime = Time.time;
-                // TODO: Rotate into move direction
+                // Rotate sprite
+                RotateIntoMoveDirection();
+
+                
             }
             else
             {
@@ -48,4 +51,20 @@ public class MoveEnemy : MonoBehaviour
             }
         }
     }
+
+    private void RotateIntoMoveDirection()
+    {
+        //1
+        Vector3 newStartPosition = waypoints[currentWaypoint].transform.position;
+        Vector3 newEndPosition = waypoints[currentWaypoint + 1].transform.position;
+        Vector3 newDirection = (newEndPosition - newStartPosition);
+        //2
+        float x = newDirection.x;
+        float y = newDirection.y;
+        float rotationAngle = Mathf.Atan2(y, x) * 180 / Mathf.PI -90;
+        //3
+        GameObject sprite = gameObject.transform.Find("Sprite").gameObject;
+        sprite.transform.rotation = Quaternion.AngleAxis(rotationAngle, Vector3.forward);
+    }
+
 }
