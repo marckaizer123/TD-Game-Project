@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TileScript : MonoBehaviour
 {
@@ -29,6 +30,28 @@ public class TileScript : MonoBehaviour
 
         transform.SetParent(parent);
         LevelManager.Instance.Tiles.Add(gridPos, this);
+    }
+
+    private void PlaceTower()
+    {
+
+        if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedButton!=null)
+        {
+            GameObject tower = (GameObject)Instantiate(GameManager.Instance.ClickedButton.TowerPrefab, WorldPosition, Quaternion.identity);
+
+            tower.GetComponent<SpriteRenderer>().sortingOrder = GridPosition.Y + 1;
+
+            tower.transform.SetParent(transform);
+        }
+        
+    }
+
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            PlaceTower();
+        }
     }
 
     // Start is called before the first frame update
