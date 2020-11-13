@@ -121,6 +121,36 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &200403729
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 200403730}
+  m_Layer: 0
+  m_Name: Map
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &200403730
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200403729}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.3443954, y: -3.5469913, z: -28.506836}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,6 +162,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -147,6 +178,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9f086935cf22294b80e819fc4af4dbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraSpeed: 5
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -156,7 +200,7 @@ Camera:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 3
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.3584906, g: 0.045656823, b: 0.13950701, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -170,7 +214,7 @@ Camera:
     y: 0
     width: 10
     height: 10
-  near clip plane: 0
+  near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
@@ -197,13 +241,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 0, y: -0, z: -0.0028679708, w: 0.99999595}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.32900003}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1570272291
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +277,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8877b67b66a02d4428d73962d27e2e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile: {fileID: 4815280888272492527, guid: 93f07927bdb3da4418514e8b9763b890, type: 3}
+  tilePrefabs:
+  - {fileID: 4815280888272492527, guid: 93f07927bdb3da4418514e8b9763b890, type: 3}
+  - {fileID: 7431021738202826084, guid: 56f5f8a89d176ac4896c3c0179638a08, type: 3}
+  - {fileID: 3265768927090080521, guid: 2a52888e9e0941f4faf3c776d64698b2, type: 3}
+  - {fileID: 1948715113081361246, guid: b1bd6a87908214c4ba2d348b8b0d9a67, type: 3}
+  moveCamera: {fileID: 519420030}
+  map: {fileID: 200403730}
+  portalPrefab: {fileID: 5522985033743086286, guid: 37ef9dd5b97d60a4ba24d316061b867c,
+    type: 3}
 --- !u!4 &1570272293
 Transform:
   m_ObjectHideFlags: 0

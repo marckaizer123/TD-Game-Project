@@ -1,38 +1,107 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField]
-    private GameObject tile;
+    private GameObject[] tilePrefabs;
 
-    public float TileSize
+    [SerializeField]
+    private MoveCamera moveCamera;
+
+    [SerializeField]
+    private Transform map;
+
+    private Point portalSpawn;
+
+    [SerializeField]
+    private GameObject portalPrefab;
+
+    /// <summary>
+    /// A dictionary that contains all the tiles in the game.
+    /// </summary>
+    public Dictionary<Point, TileScript> Tiles { get; set; }
+
+
+    public float TileSize //Gets the width of the tile.
     {
         get
         {
-            return tile.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
+            return tilePrefabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x;
         }
     }
 
-    private void PlaceTile(int x, int y, Vector3 worldStart)
+    private void PlaceTile(string tileType, int x, int y, Vector3 worldStart) //Function for placing a tile at a specific location, x is the x coordinate, y is the y coordinate, and worldStart is the start point.
     {
-        GameObject newtile = Instantiate(tile);
-        newtile.transform.position = new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0);
+        //Changes tileType into an integer so that it can be used as an index when we create a new tile.
+        int tileIndex = int.Parse(tileType);
+
+        //Creates a new tile and makes a reference to that tile using the newTile variable.
+        TileScript newTile = Instantiate(tilePrefabs[tileIndex]).GetComponent<TileScript>();
+
+        //Sets the position of the tile.
+        newTile.Setup(new Point(x, y), new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0), map);
+
+        
+        
+
+        
     }
 
+
+    private string[] ReadLevelText()
+    {
+        TextAsset bindData = Resources.Load("Level") as TextAsset;
+
+        string data = bindData.text.Replace(Environment.NewLine, string.Empty);
+
+        return data.Split('-');
+    }
 
     private void createLevel()
     {
+
+        Tiles = new Dictionary<Point, TileScript>();
+
+        //Defines the size of the map and the tiles that are at certain positions
+        string[] mapData = ReadLevelText();
+
+        //Converts the mapData into x and y coordinates
+        int mapX = mapData[0].ToCharArray().Length;
+        int mapY = mapData.Length;
+
+        Vector3 maxTile = Vector3.zero;
+
+        //Calculates the world's start point.
         Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
 
-        for (int y = 0; y < 5; y++)
+        for (int y = 0; y < mapY; y++) //The y positions of the tiles
         {
-            for (int x = 0; x < 5; x++)
+
+            char[] newTiles = mapData[y].ToCharArray();
+
+            for (int x = 0; x < mapX; x++) // The x positions of the tiles
             {
-                PlaceTile(x, y, worldStart);
+                //Places the tile in the world
+                PlaceTile(newTiles[x].ToString(), x, y, worldStart); 
             }
         }
+
+        maxTile = Tiles[new Point(mapX - 1, mapY - 1)].transform.position;
+
+        moveCamera.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y - TileSize));
+
+        SpawnPortal();
+    }
+
+
+    private void SpawnPortal()
+    {
+        portalSpawn = new Point(7, 13);
+
+        Instantiate(portalPrefab, Tiles[portalSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
     }
 
     // Start is called before the first frame update
