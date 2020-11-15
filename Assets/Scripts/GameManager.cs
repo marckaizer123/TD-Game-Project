@@ -24,27 +24,50 @@ public class GameManager : Singleton<GameManager>
     private TextMeshProUGUI currencyText;
 
 
+    //Variable that holds the clicked button.
+    public TowerButton ClickedButton { get; set; }
 
-    public TowerButton ClickedButton { get; private set; }
 
+    /// <summary>
+    /// Function that selects which tower to place.
+    /// </summary>
+    /// <param name="towerButton"></param>
     public void PickTower(TowerButton towerButton)
     {
 
         if (Currency>= towerButton.Price)
         {
             this.ClickedButton = towerButton;
+            Hover.Instance.Activate(towerButton.Sprite);
         }
         
     }
 
+
+    /// <summary>
+    /// Function to finish buying a tower. 
+    /// It subtracts the tower price from the player's currency, removes the hovering icon, and sets the selection back to null.
+    /// </summary>
     public void BuyTower()
     {
         if (Currency>= ClickedButton.Price)
         {
             Currency -= ClickedButton.Price;
-            ClickedButton = null;
+            Hover.Instance.Deactivate();
+            
         }
         
+    }
+
+    /// <summary>
+    /// Function to cancel selection of a tower. Convert to Touch controls later.
+    /// </summary>
+    private void EscapeSelection()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Hover.Instance.Deactivate();
+        }
     }
 
 
@@ -57,6 +80,6 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        
+        EscapeSelection();
     }
 }

@@ -44,12 +44,22 @@ public class LevelManager : Singleton<LevelManager>
         //Sets the position of the tile.
         newTile.Setup(new Point(x, y), new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0), map);
 
+        if(tileIndex == 0)
+        { newTile.AllowsTower = true; }
+        
+
         
         
 
         
     }
 
+    private void SpawnPortal()
+    {
+        portalSpawn = new Point(7, 13);
+
+        Instantiate(portalPrefab, Tiles[portalSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+    }
 
     private string[] ReadLevelText()
     {
@@ -97,12 +107,7 @@ public class LevelManager : Singleton<LevelManager>
     }
 
 
-    private void SpawnPortal()
-    {
-        portalSpawn = new Point(7, 13);
-
-        Instantiate(portalPrefab, Tiles[portalSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
-    }
+    
 
     // Start is called before the first frame update
     void Start()

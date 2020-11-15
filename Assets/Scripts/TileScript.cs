@@ -15,6 +15,22 @@ public class TileScript : MonoBehaviour
         }
     }
 
+    private SpriteRenderer spriteRenderer;
+
+    public SpriteRenderer SpriteRenderer   { get; set; }
+
+    private Color32 fullColor = new Color32(255, 118, 118, 255);
+
+    private Color32 emptyColor = new Color32(96, 255, 90, 255);
+
+    public bool IsEmpty { get; private set; }
+    public bool AllowsTower { get; set; }
+
+
+    private void ColorTile(Color32 newColor)
+    {
+        SpriteRenderer.color = newColor;
+    }
 
 
     /// <summary>
@@ -24,10 +40,10 @@ public class TileScript : MonoBehaviour
     /// <param name="worldPos">The world position of the tile</param>
     public void Setup(Point gridPos, Vector3 worldPos, Transform parent)
     {
+
+        IsEmpty = true;
         this.GridPosition = gridPos;
-
         transform.position = worldPos;
-
         transform.SetParent(parent);
         LevelManager.Instance.Tiles.Add(gridPos, this);
     }
@@ -37,31 +53,59 @@ public class TileScript : MonoBehaviour
         GameObject tower = (GameObject)Instantiate(GameManager.Instance.ClickedButton.TowerPrefab, WorldPosition, Quaternion.identity);
 
         tower.GetComponent<SpriteRenderer>().sortingOrder = GridPosition.Y + 1;
-
         tower.transform.SetParent(transform);
+        IsEmpty = false;
 
         GameManager.Instance.BuyTower();
 
     }
 
+    /// <summary>
+    /// Convert to touch controls later
+    /// </summary>
     private void OnMouseOver()
     {
         if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedButton != null)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (AllowsTower)
             {
-                PlaceTower();
+                if (IsEmpty)
+                {
+                    ColorTile(emptyColor); //Changes the color of the tile that is under the mouse when a tower is selected.
 
-                Debug.Log("Click");
+                    if (Input.GetMouseButtonDown(0)) //Allows placement of tower.
+                    {
+                        PlaceTower();
+                        Debug.Log("Click");
+                    }
+                }
+
+                else
+                {
+                    ColorTile(fullColor);
+
+                }
             }
+            
+            
+
+            
         }
         
+    }
+
+    /// <summary>
+    /// Convert to mouse controls later.
+    /// </summary>
+    private void OnMouseExit()
+    {
+        ColorTile(Color.white);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
