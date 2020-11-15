@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TowerButton : MonoBehaviour
 {
@@ -9,7 +10,24 @@ public class TowerButton : MonoBehaviour
     public GameObject TowerPrefab
     {
         get { return towerPrefab; }
-        set { towerPrefab = value; }
     }
+
+    [SerializeField]
+    private int price;
+
+    public int Price
+    {
+        get { return price; }
+    }
+
+    [SerializeField]
+    private TextMeshProUGUI priceText;
+
+
+    private void Start()
+    {
+        priceText.text = Price + "$";
+    }
+
 
 }

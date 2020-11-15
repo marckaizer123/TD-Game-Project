@@ -33,25 +33,29 @@ public class TileScript : MonoBehaviour
     }
 
     private void PlaceTower()
-    {
+    {       
+        GameObject tower = (GameObject)Instantiate(GameManager.Instance.ClickedButton.TowerPrefab, WorldPosition, Quaternion.identity);
 
-        if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedButton!=null)
-        {
-            GameObject tower = (GameObject)Instantiate(GameManager.Instance.ClickedButton.TowerPrefab, WorldPosition, Quaternion.identity);
+        tower.GetComponent<SpriteRenderer>().sortingOrder = GridPosition.Y + 1;
 
-            tower.GetComponent<SpriteRenderer>().sortingOrder = GridPosition.Y + 1;
+        tower.transform.SetParent(transform);
 
-            tower.transform.SetParent(transform);
-        }
-        
+        GameManager.Instance.BuyTower();
+
     }
 
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedButton != null)
         {
-            PlaceTower();
+            if (Input.GetMouseButtonDown(0))
+            {
+                PlaceTower();
+
+                Debug.Log("Click");
+            }
         }
+        
     }
 
     // Start is called before the first frame update
