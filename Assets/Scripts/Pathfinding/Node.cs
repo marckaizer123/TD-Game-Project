@@ -12,6 +12,6 @@ public class Node
     public Node(TileScript tileRef)
     {
         this.TileRef = tileRef;
-        this.GridPosition = GridPosition;
+        this.GridPosition = tileRef.GridPosition;
     }
 }

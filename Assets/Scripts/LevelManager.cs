@@ -44,9 +44,18 @@ public class LevelManager : Singleton<LevelManager>
         //Sets the position of the tile.
         newTile.Setup(new Point(x, y), new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0), map);
 
+        //if Tile is a grassTile, then sets AllowsTower to true and Walkable to false.
         if(tileIndex == 0)
-        { newTile.AllowsTower = true; }
-        
+        { 
+            newTile.AllowsTower = true;
+            newTile.Walkable = false;
+        }
+        //if Tile is a dirtTile, then sets AllowsTower to false and Walkable to true.
+        if(tileIndex == 2)
+        {
+            newTile.AllowsTower = false;
+            newTile.Walkable = true;
+        }
 
         
         
@@ -77,6 +86,7 @@ public class LevelManager : Singleton<LevelManager>
 
         //Defines the size of the map and the tiles that are at certain positions
         string[] mapData = ReadLevelText();
+
 
         //Converts the mapData into x and y coordinates
         int mapX = mapData[0].ToCharArray().Length;

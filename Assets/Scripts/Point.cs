@@ -13,4 +13,20 @@ public struct Point
     this.X = x;
     this.Y = y;
     }
+
+    /// <summary>
+    /// Check if first point is equal to second point
+    /// </summary>
+    /// <param name="first">First Point</param>
+    /// <param name="second">Second Point</param>
+    /// <returns></returns>
+    public static bool operator == (Point first, Point second)
+    {
+        return first.X == second.X && first.Y == second.Y;
+    }
+
+    public static bool operator !=(Point first, Point second)
+    {
+        return first.X != second.X || first.Y != second.Y;
+    }
 }

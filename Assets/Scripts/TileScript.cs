@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class TileScript : MonoBehaviour
 {
-    public Point GridPosition { get; private set; }
+    public Point GridPosition { get; set; }
 
     public Vector2 WorldPosition
     {
@@ -25,6 +25,8 @@ public class TileScript : MonoBehaviour
 
     public bool IsEmpty { get; private set; }
     public bool AllowsTower { get; set; }
+
+    public bool Walkable { get; set; }
 
     public bool Debugging { get; set; }
 

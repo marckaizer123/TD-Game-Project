@@ -33,9 +33,41 @@ public static class AStar
 
         HashSet<Node> openList = new HashSet<Node>();
 
+        //find the start node and creates a reference to it called currentNode.
         Node currentNode = nodes[start];
 
+        //add starting node to openlist
         openList.Add(currentNode);
+
+        //Finds the surrounding tiles from the currentNode.
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                Point neighborPos = new Point(currentNode.GridPosition.X - x, currentNode.GridPosition.Y - y);
+
+                
+                if (nodes.ContainsKey(neighborPos))
+                    //checks if the tile is in the nodes dictionary
+                {
+                    if (LevelManager.Instance.Tiles[neighborPos].Walkable && neighborPos != currentNode.GridPosition)
+                    //checks if the neighboring tiles are walkable and ignores the currentNode.
+                    {
+                        Node neighbor = nodes[neighborPos];
+
+                        //Only for debugging, remove later
+                        neighbor.TileRef.SpriteRenderer.color = Color.black;
+                    }
+                }
+
+                
+                
+                
+
+                
+
+            }
+        }
 
         //For debugging only, remove later
         GameObject.Find("Debugger").GetComponent<Debugger>().DebugPath(openList);
