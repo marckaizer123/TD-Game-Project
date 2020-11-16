@@ -1025,8 +1025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c3de10dc9c0a7d46a99ef6e016a5497, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: {fileID: 0}
-  goal: {fileID: 0}
+  blankTile: {fileID: 21300000, guid: 66e160d4faed6f94391e38ba735a8e60, type: 3}
 --- !u!1 &1570272291
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,8 +5,9 @@ using UnityEngine;
 public class Debugger : MonoBehaviour
 {
 
-    [SerializeField]
     private TileScript start, goal;
+    [SerializeField]
+    private Sprite blankTile;
 
     private void ClickTile()
     {
@@ -23,15 +24,28 @@ public class Debugger : MonoBehaviour
                     if (start == null)
                     {
                         start = tmp;
-                        start.SpriteRenderer.color = new Color32(255, 132, 0, 255);
+                        start.Debugging = true;
+                        start.SpriteRenderer.sprite = blankTile;
+                        start.SpriteRenderer.color = Color.green;
                     }
                     else if (goal == null)
                     {
                         goal = tmp;
+                        goal.Debugging = true;
+                        goal.SpriteRenderer.sprite = blankTile;
                         goal.SpriteRenderer.color = new Color32(255, 0, 0, 255);
                     }
                 }
             }
+        }
+    }
+
+    public void DebugPath(HashSet<Node> openList)
+    {
+        foreach(Node node in openList)
+        {
+            node.TileRef.SpriteRenderer.color = Color.cyan;
+            node.TileRef.SpriteRenderer.sprite = blankTile;
         }
     }
 
@@ -45,5 +59,10 @@ public class Debugger : MonoBehaviour
     void Update()
     {
         ClickTile();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            AStar.GetPath(start.GridPosition);
+        }
     }
 }

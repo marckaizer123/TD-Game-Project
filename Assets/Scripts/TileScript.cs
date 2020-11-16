@@ -26,6 +26,8 @@ public class TileScript : MonoBehaviour
     public bool IsEmpty { get; private set; }
     public bool AllowsTower { get; set; }
 
+    public bool Debugging { get; set; }
+
 
     private void ColorTile(Color32 newColor)
     {
@@ -99,7 +101,11 @@ public class TileScript : MonoBehaviour
     /// </summary>
     private void OnMouseExit()
     {
-        ColorTile(Color.white);
+        if (!Debugging)
+        {
+            ColorTile(Color.white);
+        }
+        
     }
 
     // Start is called before the first frame update
