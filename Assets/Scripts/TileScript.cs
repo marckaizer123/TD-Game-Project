@@ -17,7 +17,6 @@ public class TileScript : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
-    public SpriteRenderer SpriteRenderer   { get; set; }
 
     private Color32 fullColor = new Color32(255, 118, 118, 255);
 
@@ -33,7 +32,7 @@ public class TileScript : MonoBehaviour
 
     private void ColorTile(Color32 newColor)
     {
-        SpriteRenderer.color = newColor;
+        spriteRenderer.color = newColor;
     }
 
 
@@ -113,7 +112,7 @@ public class TileScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame

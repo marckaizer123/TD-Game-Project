@@ -14,10 +14,18 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField]
     private Transform map;
 
-    private Point portalSpawn;
+
+    private Point startSpawn;
+    private Point goalSpawn;
+
 
     [SerializeField]
-    private GameObject portalPrefab;
+    private GameObject startPrefab;
+    [SerializeField]
+    private GameObject goalPrefab;
+
+    public Portal StartPortal { get; set; }
+    public Portal GoalPortal { get; set; }
 
     /// <summary>
     /// A dictionary that contains all the tiles in the game.
@@ -65,9 +73,19 @@ public class LevelManager : Singleton<LevelManager>
 
     private void SpawnPortal()
     {
-        portalSpawn = new Point(7, 13);
+        startSpawn = new Point(0, 1);
+        goalSpawn = new Point(7, 13);
 
-        Instantiate(portalPrefab, Tiles[portalSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+        GameObject tmp = (GameObject)Instantiate(startPrefab, Tiles[startSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+
+        StartPortal = tmp.GetComponent<Portal>();
+        StartPortal.name = "Start";
+
+        tmp = (GameObject)Instantiate(goalPrefab, Tiles[goalSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+
+        
+        GoalPortal = tmp.GetComponent<Portal>();
+        GoalPortal.name = "Goal";
     }
 
     private string[] ReadLevelText()

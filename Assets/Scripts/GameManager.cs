@@ -27,6 +27,50 @@ public class GameManager : Singleton<GameManager>
     //Variable that holds the clicked button.
     public TowerButton ClickedButton { get; set; }
 
+    public ObjectPool Pool { get; set; }
+
+
+    
+
+    private IEnumerator SpawnWave()
+    {
+
+        int monsterIndex = Random.Range(0, 3);
+
+        string type = string.Empty;
+
+        switch (monsterIndex)
+        {
+            case 0:
+            type = "MonsterPrefab1";
+            break;
+
+            case 1:
+            type = "MonsterPrefab1";
+            break;
+
+            case 2:
+            type = "MonsterPrefab1";
+            break;
+
+            case 3:
+            type = "MonsterPrefab1";
+            break;
+
+        }
+
+        Monster monster = Pool.GetObject(type).GetComponent<Monster>();
+        monster.Spawn();
+
+        //delay between spawning of monsters.
+        yield return new WaitForSeconds(2.5f);
+    }
+
+    public void StartWave()
+    {
+        StartCoroutine(SpawnWave());
+    }
+
 
     /// <summary>
     /// Function that selects which tower to place.
@@ -70,6 +114,12 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+
+    // Awake is called on loading the script
+    private void Awake()
+    {
+        Pool = GetComponent<ObjectPool>();
+    }
 
     // Start is called before the first frame update
     void Start()
