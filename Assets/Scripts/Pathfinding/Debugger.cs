@@ -120,7 +120,7 @@ public class Debugger : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         ClickTile();
 
@@ -128,5 +128,5 @@ public class Debugger : MonoBehaviour
         {
             AStar.GetPath(start.GridPosition, goal.GridPosition);
         }
-    }
+    }*/
 }

@@ -24,6 +24,20 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField]
     private GameObject goalPrefab;
 
+    private Stack<Node> path;
+
+    public Stack<Node> Path
+    {
+        get
+        {
+            if(path == null)
+            {
+                GeneratePath();
+            }
+            return new Stack<Node>(new Stack<Node>(path));
+        }
+    }
+
     public Portal StartPortal { get; set; }
     public Portal GoalPortal { get; set; }
 
@@ -63,12 +77,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             newTile.AllowsTower = false;
             newTile.Walkable = true;
-        }
-
-        
-        
-
-        
+        }  
     }
 
     private void SpawnPortal()
@@ -132,6 +141,11 @@ public class LevelManager : Singleton<LevelManager>
         moveCamera.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y - TileSize));
 
         SpawnPortal();
+    }
+
+    public void GeneratePath()
+    {
+        path = AStar.GetPath(startSpawn, goalSpawn);
     }
 
 
