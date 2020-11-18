@@ -8,11 +8,12 @@ public struct Point
     public int X { get; set; }
     public int Y { get; set; }
 
-    public Point (int x, int y)
+    public Point(int x, int y)
     {
     this.X = x;
     this.Y = y;
     }
+
 
     /// <summary>
     /// Check if first point is equal to second point
@@ -25,7 +26,7 @@ public struct Point
         return first.X == second.X && first.Y == second.Y;
     }
 
-    public static bool operator !=(Point first, Point second)
+    public static bool operator != (Point first, Point second)
     {
         return first.X != second.X || first.Y != second.Y;
     }
