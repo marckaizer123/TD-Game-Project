@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -21,6 +22,29 @@ public class GameManager : Singleton<GameManager>
     }
     [SerializeField]
     private TextMeshProUGUI currencyText;
+
+    private int playerLives;
+
+    public int PlayerLives
+    {
+        get { return playerLives; }
+        set 
+        {
+
+            this.playerLives = value;
+
+            if (playerLives <= 0)
+            {
+                this.playerLives = 0;
+                GameOver();
+            }
+            
+            this.playerLivesText.text = "Lives: " + playerLives.ToString();
+        }
+    }
+
+    [SerializeField]
+    private TextMeshProUGUI playerLivesText;
 
     private int wave = 0;
 
@@ -46,6 +70,13 @@ public class GameManager : Singleton<GameManager>
     public TowerButton ClickedButton { get; set; }
 
     public ObjectPool Pool { get; set; }
+
+
+    private bool gameOver = false;
+
+    [SerializeField]
+    private GameObject gameOverMenu;
+
 
     /// <summary>
     /// Starts the wave when the Wave Button is pressed.
@@ -123,7 +154,7 @@ public class GameManager : Singleton<GameManager>
             activeMonsters.Add(monster);
 
             //delay between spawning of monsters.
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.5f);
         }
 
         
@@ -134,7 +165,7 @@ public class GameManager : Singleton<GameManager>
     {
         activeMonsters.Remove(monster);
 
-        if (!waveIsActive)
+        if (!waveIsActive && !gameOver)
         {
             waveButton.SetActive(true);
         }
@@ -149,7 +180,7 @@ public class GameManager : Singleton<GameManager>
     public void PickTower(TowerButton towerButton)
     {
 
-        if (Currency>= towerButton.Price && !waveIsActive)
+        if (Currency>= towerButton.Price && !waveIsActive && !gameOver)
         {
             this.ClickedButton = towerButton;
             Hover.Instance.Activate(towerButton.Sprite);
@@ -184,6 +215,30 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    /// <summary>
+    /// Game Over code
+    /// </summary>
+    public void GameOver()
+    {
+        if (!gameOver)
+        {
+            gameOver = true;
+            gameOverMenu.SetActive(true);
+        }
+    }
+
+    public void Restart()
+    {
+
+        Time.timeScale = 1;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 
     // Awake is called on loading the script
     private void Awake()
@@ -194,6 +249,7 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
+        PlayerLives = 10;
         Currency = 500;
     }
 

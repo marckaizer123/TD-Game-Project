@@ -82,8 +82,9 @@ public class LevelManager : Singleton<LevelManager>
 
     private void SpawnPortal()
     {
-        startSpawn = new Point(0, 1);
-        goalSpawn = new Point(7, 13);
+        startSpawn = new Point(1, 2);
+        goalSpawn = new Point(1, 5);
+        //goalSpawn = new Point(22, 2);
 
         GameObject tmp = (GameObject)Instantiate(startPrefab, Tiles[startSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
 

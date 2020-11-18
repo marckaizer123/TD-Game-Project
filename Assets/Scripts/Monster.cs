@@ -13,21 +13,27 @@ public class Monster : MonoBehaviour
 
     private Vector3 destination;
 
+    private bool allowMovement;
+
     /// <summary>
     /// Moves the monster
     /// </summary>
     private void MoveMonster()
     {
-        RotateMonster();
 
-        transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
-
-        if (transform.position == destination)
+        if (allowMovement)
         {
-            if (path != null && path.Count > 0)
+            RotateMonster();
+
+            transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+
+            if (transform.position == destination)
             {
-                GridPosition = path.Peek().GridPosition;
-                destination = path.Pop().WorldPosition;
+                if (path != null && path.Count > 0)
+                {
+                    GridPosition = path.Peek().GridPosition;
+                    destination = path.Pop().WorldPosition;
+                }
             }
         }
     }
@@ -63,7 +69,11 @@ public class Monster : MonoBehaviour
     {
         transform.position = LevelManager.Instance.StartPortal.transform.position;
 
+        allowMovement = false;
+
         StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(1, 1), false));
+
+        
 
         SetPath(LevelManager.Instance.Path);
     }
@@ -89,7 +99,9 @@ public class Monster : MonoBehaviour
 
         transform.localScale = to;
 
-        if(remove == true)
+        allowMovement = true;
+
+        if (remove == true)
         {
             Release();
         }
@@ -97,6 +109,7 @@ public class Monster : MonoBehaviour
 
     private void Release()
     {
+
         GameManager.Instance.Pool.ReleaseObject(gameObject);
         GameManager.Instance.RemoveMonster(this);
     }
@@ -106,8 +119,11 @@ public class Monster : MonoBehaviour
     {
         if(collision.tag == "Goal")
         {
+            //Scale the monster down.
             StartCoroutine(Scale(new Vector3(1, 1), new Vector3(0.1f, 0.1f), true));
+            GameManager.Instance.PlayerLives--;
         }
+        
     }
 
     private void Update()
