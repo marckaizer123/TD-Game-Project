@@ -30,6 +30,9 @@ public class TileScript : MonoBehaviour
     public bool Debugging { get; set; }
 
 
+    private Tower myTower;
+
+
     private void ColorTile(Color32 newColor)
     {
         spriteRenderer.color = newColor;
@@ -57,6 +60,10 @@ public class TileScript : MonoBehaviour
 
         tower.GetComponent<SpriteRenderer>().sortingOrder = GridPosition.Y + 1;
         tower.transform.SetParent(transform);
+
+        this.myTower = tower.transform.GetChild(0).GetComponent<Tower>();
+
+
         IsEmpty = false;
 
         GameManager.Instance.BuyTower();
@@ -89,10 +96,18 @@ public class TileScript : MonoBehaviour
 
                 }
             }
-            
-            
+        }
 
-            
+        else if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedButton == null && Input.GetMouseButtonDown(0))
+        {
+            if(myTower != null)
+            {
+                GameManager.Instance.SelectTower(myTower);
+            }
+            else
+            {
+                GameManager.Instance.DeselectTower();
+            }
         }
         
     }

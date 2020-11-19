@@ -77,6 +77,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject gameOverMenu;
 
+    private Tower selectedTower;
+
 
     /// <summary>
     /// Starts the wave when the Wave Button is pressed.
@@ -183,7 +185,7 @@ public class GameManager : Singleton<GameManager>
         if (Currency>= towerButton.Price && !waveIsActive && !gameOver)
         {
             this.ClickedButton = towerButton;
-            Hover.Instance.Activate(towerButton.Sprite);
+            Hover.Instance.Activate(towerButton.TowerPrefab);
         }
         
     }
@@ -202,6 +204,26 @@ public class GameManager : Singleton<GameManager>
             
         }
         
+    }
+
+    public void SelectTower(Tower tower)
+    {
+        if(selectedTower != null)
+        {
+            selectedTower.Select();
+        }
+        selectedTower = tower;
+        selectedTower.Select();
+    }
+
+    public void DeselectTower()
+    {
+        if (selectedTower != null)
+        {
+            selectedTower.Select();
+        }
+
+        selectedTower = null;
     }
 
     /// <summary>
