@@ -11,7 +11,10 @@ public class MoveCamera : MonoBehaviour
     private float xMax;
     private float yMin;
 
-
+    /// <summary>
+    /// sets the boundaries that the camera can move in.
+    /// </summary>
+    /// <param name="maxTile"></param>
     public void SetLimits(Vector3 maxTile)
     {
         Vector3 wp = Camera.main.ViewportToWorldPoint(new Vector3(1, 0));
@@ -44,8 +47,8 @@ public class MoveCamera : MonoBehaviour
             transform.Translate(Vector3.right * cameraSpeed * Time.deltaTime);
 
         }
-
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, 0, xMax), Mathf.Clamp(transform.position.y, yMin, 0), -10);
+        // prevents the camera from moving beyond the set boundaries.
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, 0, xMax), Mathf.Clamp(transform.position.y, yMin, 0), -10); 
     }
 
     // Start is called before the first frame update

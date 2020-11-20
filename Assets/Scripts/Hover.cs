@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Hover is used to allow the players to preview the tower they are going to place, its range, and whether or not they will be allowed to put it in a particular place
+/// </summary>
 public class Hover :Singleton<Hover>
 {
 

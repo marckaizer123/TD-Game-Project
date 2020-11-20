@@ -47,7 +47,7 @@ public class TileScript : MonoBehaviour
     public void Setup(Point gridPos, Vector3 worldPos, Transform parent)
     {
 
-        IsEmpty = true;
+        IsEmpty = true; // sets the tile to be empty.
         this.GridPosition = gridPos;
         transform.position = worldPos;
         transform.SetParent(parent);
@@ -55,8 +55,12 @@ public class TileScript : MonoBehaviour
     }
 
     private void PlaceTower()
-    {       
-        GameObject tower = (GameObject)Instantiate(GameManager.Instance.ClickedButton.TowerPrefab, WorldPosition, Quaternion.identity);
+    {   
+        
+        // instantiates a game object called tower.
+        GameObject tower = Instantiate(GameManager.Instance.ClickedButton.TowerPrefab, //The game object placed will be equal to the tower prefab set by the clicked button.
+                                       WorldPosition, // the tower will be instantiated at the grid position it was placed in.
+                                       Quaternion.identity);
 
         tower.GetComponent<SpriteRenderer>().sortingOrder = GridPosition.Y + 1;
         tower.transform.SetParent(transform);
@@ -77,22 +81,21 @@ public class TileScript : MonoBehaviour
     {
         if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedButton != null)
         {
-            if (AllowsTower)
+            if (AllowsTower) // checks if the tile allows you to place the tower
             {
-                if (IsEmpty)
+                if (IsEmpty)// checks if the tile is empty
                 {
-                    ColorTile(emptyColor); //Changes the color of the tile that is under the mouse when a tower is selected.
+                    ColorTile(emptyColor); //Changes the color of the tile to indicate that it is empty.
 
                     if (Input.GetMouseButtonDown(0)) //Allows placement of tower.
                     {
                         PlaceTower();
-                        Debug.Log("Click");
                     }
                 }
 
                 else
                 {
-                    ColorTile(fullColor);
+                    ColorTile(fullColor); //changes the color of the tile to indicate that it is occupied.
 
                 }
             }
@@ -113,7 +116,7 @@ public class TileScript : MonoBehaviour
     }
 
     /// <summary>
-    /// Convert to mouse controls later.
+    /// Convert to touchscreen controls later.
     /// </summary>
     private void OnMouseExit()
     {

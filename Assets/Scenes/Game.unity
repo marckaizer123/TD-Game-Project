@@ -3065,6 +3065,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPrefabs:
   - {fileID: 1292784361300963804, guid: c4e5ecf8824fc044dbac613c172f8eee, type: 3}
+  - {fileID: 1292784361300963804, guid: c4e5ecf8824fc044dbac613c172f8eee, type: 3}
+  - {fileID: 1292784361300963804, guid: c4e5ecf8824fc044dbac613c172f8eee, type: 3}
+  - {fileID: 1292784361300963804, guid: c4e5ecf8824fc044dbac613c172f8eee, type: 3}
+  - {fileID: 1377302256537077568, guid: d403368b160abdc48b8ba6525596677d, type: 3}
+  - {fileID: 1377302256537077568, guid: d403368b160abdc48b8ba6525596677d, type: 3}
+  - {fileID: 3045637176384675568, guid: 354466d0134f4ad4094f5acd2e7d0e8e, type: 3}
+  - {fileID: 3045637176384675568, guid: 354466d0134f4ad4094f5acd2e7d0e8e, type: 3}
 --- !u!1 &2124056708
 GameObject:
   m_ObjectHideFlags: 0

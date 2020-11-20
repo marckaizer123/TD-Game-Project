@@ -47,6 +47,8 @@ public class GameManager : Singleton<GameManager>
     private TextMeshProUGUI playerLivesText;
 
     private int wave = 0;
+    private int waveSize = 0;
+
 
     [SerializeField]
     private TextMeshProUGUI waveText;
@@ -61,7 +63,7 @@ public class GameManager : Singleton<GameManager>
     {
         get
         {
-            return activeMonsters.Count > 0;
+            return activeMonsters.Count > 0; // the wave is considered active so long as the monster game objects are still active.
         }
 
     }
@@ -89,6 +91,7 @@ public class GameManager : Singleton<GameManager>
 
         waveText.text = string.Format("Wave: {0}", wave);
 
+        
         StartCoroutine(SpawnWave());
 
         //Hide Wave Button when wave is ongoing
@@ -101,25 +104,16 @@ public class GameManager : Singleton<GameManager>
     /// <returns></returns>
     private IEnumerator SpawnWave()
     {
-        int waveSize = 3;
+
+        waveSize++;
+
+        if (wave % 5 == 0)
+        {
+            waveSize += 2;
+        }
+
+
         int monsterIndex;
-
-
-        if (wave == 1)
-        {
-            waveSize = wave;
-        }
-        else if (wave > 1 && wave<5)
-        {
-            waveSize = wave + 1;
-        }
-        else if (wave >= 5 && wave < 10)
-        {
-            waveSize = wave + 3;
-        }
-
-        
-
 
         string type = string.Empty;
         LevelManager.Instance.GeneratePath();

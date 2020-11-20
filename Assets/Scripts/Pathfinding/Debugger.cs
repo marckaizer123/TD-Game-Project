@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Used to debug the A search function.
+/// </summary>
 public class Debugger : MonoBehaviour
 {
 

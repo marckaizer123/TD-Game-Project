@@ -175,6 +175,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7209066990394745236, guid: 7b2f0c372a740694ba89e72e49644a9c,
+        type: 3}
+      propertyPath: projectileType
+      value: Bullet2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7209066990394745236, guid: 7b2f0c372a740694ba89e72e49644a9c,
+        type: 3}
+      propertyPath: attackCooldown
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7209066990394745236, guid: 7b2f0c372a740694ba89e72e49644a9c,
+        type: 3}
+      propertyPath: projectileSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7209066990394745236, guid: 7b2f0c372a740694ba89e72e49644a9c,
+        type: 3}
+      propertyPath: damage
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8425265235947520572, guid: 7b2f0c372a740694ba89e72e49644a9c,
         type: 3}
       propertyPath: m_Enabled

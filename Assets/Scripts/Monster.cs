@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
+
+    private bool allowMovement;
+
     [SerializeField]
     private float speed = 0;
+
+    [SerializeField]
+    private Stat health;
+
+
 
     private Stack<Node> path;
 
@@ -13,7 +21,7 @@ public class Monster : MonoBehaviour
 
     private Vector3 destination;
 
-    private bool allowMovement;
+    
 
     /// <summary>
     /// Moves the monster
@@ -45,9 +53,12 @@ public class Monster : MonoBehaviour
     {
         Vector3 faceDirection = destination - transform.position;
 
-        float rotationAngle = Mathf.Atan2(faceDirection.y, faceDirection.x) * 180 / Mathf.PI;
+        float rotationAngle = Mathf.Atan2(faceDirection.y, faceDirection.x) * 180 / Mathf.PI - 90;
 
-        transform.rotation = Quaternion.AngleAxis(rotationAngle, Vector3.forward);
+
+        //rotates only the monster sprite of the monster game object.
+        transform.GetChild(0).transform.rotation = Quaternion.AngleAxis(rotationAngle, Vector3.forward);
+
     }
 
     /// <summary>
@@ -55,27 +66,28 @@ public class Monster : MonoBehaviour
     /// </summary>
     private void SetPath(Stack<Node> newPath)
     {
-        if(newPath != null)
+        if(newPath != null) // checks if the new path exists. 
         {
-            this.path = newPath;
-
-            GridPosition = path.Peek().GridPosition;
-            destination = path.Pop().WorldPosition;
+            this.path = newPath; // if the path exists, then the monster's path will be set to the new path.
+            GridPosition = path.Peek().GridPosition; 
+            destination = path.Pop().WorldPosition; // as the monsters reach their destination, update the destination to the next worldposition in the queue.
         }
     }
 
     //Spawns the monsters. Uses scale to make the monster start from a smaller size then scale into a bigger size to give the effect of coming through a portal.
     public void Spawn()
     {
-        transform.position = LevelManager.Instance.StartPortal.transform.position;
+        transform.position = LevelManager.Instance.StartPortal.transform.position; // sets the position where the monster will spawn.
+        this.health.MaxVal = 10;
+        this.health.CurrentVal = this.health.MaxVal;
 
-        allowMovement = false;
+        allowMovement = false; // disallows movement while the monster is scaling.
 
-        StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(1, 1), false));
+        StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(1, 1), false));// starts the scaling function alongside the spawn function.
 
         
 
-        SetPath(LevelManager.Instance.Path);
+        SetPath(LevelManager.Instance.Path); // sets the path that the monster will follow.
     }
 
     /// <summary>
@@ -107,6 +119,24 @@ public class Monster : MonoBehaviour
         }
     }
 
+
+    public void TakeDamage (float damage)
+    {
+        if (isActiveAndEnabled)
+        {
+            health.CurrentVal = Mathf.Clamp(health.CurrentVal - damage, 0, health.MaxVal) ;
+
+            if (health.CurrentVal <= 0)
+            {
+                GameManager.Instance.Currency += 25;
+
+                Release();
+            }
+        }
+        
+
+    }
+
     private void Release()
     {
 
@@ -121,13 +151,18 @@ public class Monster : MonoBehaviour
         {
             //Scale the monster down.
             StartCoroutine(Scale(new Vector3(1, 1), new Vector3(0.1f, 0.1f), true));
-            GameManager.Instance.PlayerLives--;
+            GameManager.Instance.PlayerLives--;// take away one of the player lives upon a monster reaching the goal.
         }
         
     }
 
+    private void Awake()
+    {
+        health.Initialize();
+    }
+
     private void Update()
     {
-        MoveMonster();
+        MoveMonster(); //calls the move monster function every tick.
     }
 }

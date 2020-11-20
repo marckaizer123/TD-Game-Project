@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Object pool is used to prevent instantiating and destroying game objects each tick and save on memory. 
+/// </summary>
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField]
@@ -11,6 +15,7 @@ public class ObjectPool : MonoBehaviour
 
     public GameObject GetObject(string type)
     {
+        //search the pool for inactive game objects to be reused.
         foreach (GameObject go in pooledObjects)
         {
             if(go.name == type && !go.activeInHierarchy)
@@ -39,6 +44,6 @@ public class ObjectPool : MonoBehaviour
 
     public void ReleaseObject(GameObject gameObject)
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(false);// sets the game object to be inactive
     }
 }

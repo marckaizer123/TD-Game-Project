@@ -83,8 +83,8 @@ public class LevelManager : Singleton<LevelManager>
     private void SpawnPortal()
     {
         startSpawn = new Point(1, 2);
-        goalSpawn = new Point(1, 5);
-        //goalSpawn = new Point(22, 2);
+        //goalSpawn = new Point(1, 5); for testing purposes
+        goalSpawn = new Point(22, 2);
 
         GameObject tmp = (GameObject)Instantiate(startPrefab, Tiles[startSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
 
@@ -133,7 +133,10 @@ public class LevelManager : Singleton<LevelManager>
             for (int x = 0; x < mapX; x++) // The x positions of the tiles
             {
                 //Places the tile in the world
-                PlaceTile(newTiles[x].ToString(), x, y, worldStart); 
+                PlaceTile(newTiles[x].ToString(),
+                          x,
+                          y,
+                          worldStart);
             }
         }
 
