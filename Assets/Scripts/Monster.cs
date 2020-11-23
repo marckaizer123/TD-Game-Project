@@ -4,16 +4,62 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-
-    private bool allowMovement;
-
-    [SerializeField]
-    private float speed = 0;
-
     [SerializeField]
     private Stat health;
 
+    public Stat Health
+    {
+        get
+        {
+            return health;
+        }
 
+        set
+        {
+            this.health = value;
+        }
+    }
+
+    //public Dictionary<Point, TileScript> Tiles { get; set; }
+
+    //public Dictionary<Debuff, > newDebuff = new Dictionary<Debuff, bool>();
+
+
+    private List<Debuff> newDebuffs = new List<Debuff>();
+    private List<Debuff> debuffs = new List<Debuff>();
+    private List<Debuff> expiredDebuffs = new List<Debuff>();
+
+    
+    private bool allowMovement;
+
+    public bool AllowMovement
+    {
+        get
+        {
+            return allowMovement;
+        }
+        set
+        {
+            allowMovement = value;
+        }
+    }
+
+    [SerializeField]
+    private float currentSpeed;
+
+    public float CurrentSpeed
+    {
+        get
+        {
+            return currentSpeed;
+        }
+        set
+        {
+            this.currentSpeed = value;
+        }
+    }
+
+    public float MaxSpeed { get; set; }
 
     private Stack<Node> path;
 
@@ -28,12 +74,13 @@ public class Monster : MonoBehaviour
     /// </summary>
     private void MoveMonster()
     {
-
+        //Check if the monster is allowed to move
         if (allowMovement)
         {
+            
             RotateMonster();
 
-            transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, destination, currentSpeed * Time.deltaTime);
 
             if (transform.position == destination)
             {
@@ -51,9 +98,11 @@ public class Monster : MonoBehaviour
     /// </summary>
     private void RotateMonster()
     {
+        //Calculates the direction of the monsters next destination relative to its current position
         Vector3 faceDirection = destination - transform.position;
 
-        float rotationAngle = Mathf.Atan2(faceDirection.y, faceDirection.x) * 180 / Mathf.PI - 90;
+        //Calculates the angle of rotation needed for the monster to face the correct direction.
+        float rotationAngle = Mathf.Atan2(faceDirection.y, faceDirection.x) * 180 / Mathf.PI +90;
 
 
         //rotates only the monster sprite of the monster game object.
@@ -77,11 +126,12 @@ public class Monster : MonoBehaviour
     //Spawns the monsters. Uses scale to make the monster start from a smaller size then scale into a bigger size to give the effect of coming through a portal.
     public void Spawn()
     {
+
         transform.position = LevelManager.Instance.StartPortal.transform.position; // sets the position where the monster will spawn.
-        this.health.MaxVal = 10;
+        
         this.health.CurrentVal = this.health.MaxVal;
 
-        allowMovement = false; // disallows movement while the monster is scaling.
+        //allowMovement = false; // disallows movement while the monster is scaling.
 
         StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(1, 1), false));// starts the scaling function alongside the spawn function.
 
@@ -119,6 +169,52 @@ public class Monster : MonoBehaviour
         }
     }
 
+    public void AddDebuff(Debuff debuff)
+    {
+        
+        
+        if(!debuffs.Exists(x => x.GetType() == debuff.GetType()) && !newDebuffs.Exists(x => x.GetType() == debuff.GetType())) // prevents same type of debuffs stacking
+        {
+            //Debuffs are first added to newDebuffs
+            newDebuffs.Add(debuff);
+        }
+
+        
+    }
+
+    private void HandleDebuffs()
+    {
+        if (expiredDebuffs.Count > 0)
+        {
+            //Checks for each debuff that has expired
+            foreach (Debuff debuff in expiredDebuffs)
+            {
+                //removes each expired debuff before handling them.
+                debuffs.Remove(debuff);
+            }
+
+            expiredDebuffs.Clear();
+        }
+
+        //Checks if there are new debuffs placed on the monster
+        if (newDebuffs.Count > 0)
+        {
+            debuffs.AddRange(newDebuffs);
+            newDebuffs.Clear();
+        }
+           
+
+        foreach (Debuff debuff in debuffs)
+        {
+            debuff.Update();
+        }
+    }
+
+    public void RemoveDebuff(Debuff debuff)
+    {
+        expiredDebuffs.Add(debuff);
+    }
+
 
     public void TakeDamage (float damage)
     {
@@ -129,7 +225,7 @@ public class Monster : MonoBehaviour
             if (health.CurrentVal <= 0)
             {
                 GameManager.Instance.Currency += 25;
-
+                
                 Release();
             }
         }
@@ -139,7 +235,9 @@ public class Monster : MonoBehaviour
 
     private void Release()
     {
-
+        expiredDebuffs.AddRange(debuffs); //remove all debuffs once monster is released.
+        allowMovement = false;
+        currentSpeed = MaxSpeed;
         GameManager.Instance.Pool.ReleaseObject(gameObject);
         GameManager.Instance.RemoveMonster(this);
     }
@@ -149,20 +247,30 @@ public class Monster : MonoBehaviour
     {
         if(collision.tag == "Goal")
         {
-            //Scale the monster down.
+            //Scale the monster down once it enters the goal
             StartCoroutine(Scale(new Vector3(1, 1), new Vector3(0.1f, 0.1f), true));
             GameManager.Instance.PlayerLives--;// take away one of the player lives upon a monster reaching the goal.
+        }
+
+        if(collision.tag == "Tile")
+        {
+            //change the layer sorting order when the monster enters a new tile.
+            transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = collision.GetComponent<TileScript>().GridPosition.Y;
         }
         
     }
 
     private void Awake()
     {
+        MaxSpeed = currentSpeed;
         health.Initialize();
+        
     }
 
     private void Update()
     {
         MoveMonster(); //calls the move monster function every tick.
+        HandleDebuffs();
+       
     }
 }

@@ -5,9 +5,13 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Delegate for the currency changed event
+/// </summary>
+public delegate void CurrencyChanged();
+
 public class GameManager : Singleton<GameManager>
 {
-
     private int currency;
     public int Currency
     {
@@ -17,11 +21,16 @@ public class GameManager : Singleton<GameManager>
         }
         set 
         { this.currency = value;
-          this.currencyText.text = value.ToString() + "$";
+          this.currencyText.text = value.ToString();
+
+          OnCurrencyChange();
         }
     }
     [SerializeField]
     private TextMeshProUGUI currencyText;
+
+    //event that triggers when currency is changed.
+    public event CurrencyChanged CurrencyChange;
 
     private int playerLives;
 
@@ -39,7 +48,7 @@ public class GameManager : Singleton<GameManager>
                 GameOver();
             }
             
-            this.playerLivesText.text = "Lives: " + playerLives.ToString();
+            this.playerLivesText.text = playerLives.ToString();
         }
     }
 
@@ -79,7 +88,26 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject gameOverMenu;
 
+    [SerializeField]
+    private GameObject gamePanel;
+
+    [SerializeField]
+    private GameObject pauseMenu;
+
     private Tower selectedTower;
+
+    [SerializeField]
+    private TextMeshProUGUI sellText;
+
+
+    [SerializeField]
+    private GameObject statsPanel;
+
+    [SerializeField]
+    private TextMeshProUGUI sizeText;
+
+    [SerializeField]
+    private TextMeshProUGUI visibleText;
 
 
     /// <summary>
@@ -127,19 +155,19 @@ public class GameManager : Singleton<GameManager>
             switch (monsterIndex)
             {
                 case 0:
-                    type = "MonsterPrefab1";
+                    type = "TiyanakPrefab";
                     break;
 
                 case 1:
-                    type = "MonsterPrefab1";
+                    type = "TiyanakPrefab";
                     break;
 
                 case 2:
-                    type = "MonsterPrefab1";
+                    type = "TiyanakPrefab";
                     break;
 
                 case 3:
-                    type = "MonsterPrefab1";
+                    type = "TiyanakPrefab";
                     break;
 
             }
@@ -167,7 +195,16 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void ShowStats()
+    {
+        statsPanel.SetActive(!statsPanel.activeSelf);
+    }
 
+    public void SetToolTipText(string txt)
+    {
+        visibleText.text = txt;
+        sizeText.text = txt;
+    }
 
     /// <summary>
     /// Function that selects which tower to place.
@@ -200,14 +237,41 @@ public class GameManager : Singleton<GameManager>
         
     }
 
+    public void OnCurrencyChange()
+    {
+        if (CurrencyChange != null)
+        {
+            CurrencyChange();
+        }
+    }
+
+    public void SellTower()
+    {
+        if (selectedTower != null && !waveIsActive && !gameOver)
+        {
+            Currency += selectedTower.Price / 2;
+
+            Destroy(selectedTower.transform.parent.gameObject);
+            selectedTower.GetComponentInParent<TileScript>().IsEmpty = true;
+            DeselectTower();        }
+    }
+
     public void SelectTower(Tower tower)
     {
         if(selectedTower != null)
         {
             selectedTower.Select();
         }
+
+        //Sets the selected tower.
         selectedTower = tower;
+
+        //Selects the Tower
         selectedTower.Select();
+
+        gamePanel.SetActive(true);
+
+        sellText.text = "Sell : " + selectedTower.Price/2;
     }
 
     public void DeselectTower()
@@ -218,6 +282,7 @@ public class GameManager : Singleton<GameManager>
         }
 
         selectedTower = null;
+        gamePanel.SetActive(false);
     }
 
     /// <summary>
@@ -228,6 +293,22 @@ public class GameManager : Singleton<GameManager>
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Hover.Instance.Deactivate();
+
+            ShowPauseMenu();
+        }
+    }
+
+    public void ShowPauseMenu()
+    {
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
+
+        if (!pauseMenu.activeSelf)
+        {
+            Time.timeScale = 1;
+        }
+        else
+        {
+            Time.timeScale = 0;
         }
     }
 
