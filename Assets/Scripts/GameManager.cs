@@ -26,6 +26,7 @@ public class GameManager : Singleton<GameManager>
           OnCurrencyChange();
         }
     }
+
     [SerializeField]
     private TextMeshProUGUI currencyText;
 
@@ -83,23 +84,6 @@ public class GameManager : Singleton<GameManager>
     public ObjectPool Pool { get; set; }
 
 
-    private bool gameOver = false;
-
-    [SerializeField]
-    private GameObject gameOverMenu;
-
-    [SerializeField]
-    private GameObject gamePanel;
-
-    [SerializeField]
-    private GameObject pauseMenu;
-
-    private Tower selectedTower;
-
-    [SerializeField]
-    private TextMeshProUGUI sellText;
-
-
     [SerializeField]
     private GameObject statsPanel;
 
@@ -109,6 +93,37 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private TextMeshProUGUI visibleText;
 
+    private bool gameOver = false;
+
+
+    [SerializeField]
+    private GameObject gameOverMenu;
+
+    [SerializeField]
+    private GameObject ingameMenu;
+
+    [SerializeField]
+    private GameObject pauseMenu;
+
+    [SerializeField]
+    private GameObject optionsMenu;
+
+    [SerializeField]
+    private GameObject gamePanel;
+
+    
+
+
+
+
+    private Tower selectedTower;
+
+    [SerializeField]
+    private TextMeshProUGUI sellText;
+
+
+    
+
 
     /// <summary>
     /// Starts the wave when the Wave Button is pressed.
@@ -116,12 +131,8 @@ public class GameManager : Singleton<GameManager>
     public void StartWave()
     {
         wave++;
-
-        waveText.text = string.Format("Wave: {0}", wave);
-
-        
+        waveText.text = string.Format("Wave: {0}", wave); 
         StartCoroutine(SpawnWave());
-
         //Hide Wave Button when wave is ongoing
         waveButton.SetActive(false);
     }
@@ -195,16 +206,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void ShowStats()
-    {
-        statsPanel.SetActive(!statsPanel.activeSelf);
-    }
-
-    public void SetToolTipText(string txt)
-    {
-        visibleText.text = txt;
-        sizeText.text = txt;
-    }
+    
 
     /// <summary>
     /// Function that selects which tower to place.
@@ -224,6 +226,7 @@ public class GameManager : Singleton<GameManager>
 
     /// <summary>
     /// Function to finish buying a tower. 
+    /// Only allowed to finish buying when player has enough currency
     /// It subtracts the tower price from the player's currency, removes the hovering icon, and sets the selection back to null.
     /// </summary>
     public void BuyTower()
@@ -232,11 +235,11 @@ public class GameManager : Singleton<GameManager>
         {
             Currency -= ClickedButton.Price;
             Hover.Instance.Deactivate();
-            
         }
         
     }
 
+    //Upon player currency changing.
     public void OnCurrencyChange()
     {
         if (CurrencyChange != null)
@@ -245,6 +248,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    //Function to sell tower.
     public void SellTower()
     {
         if (selectedTower != null && !waveIsActive && !gameOver)
@@ -294,22 +298,20 @@ public class GameManager : Singleton<GameManager>
         {
             Hover.Instance.Deactivate();
 
-            ShowPauseMenu();
+
+            ShowInGameMenu();
         }
     }
 
-    public void ShowPauseMenu()
+    public void ShowStats()
     {
-        pauseMenu.SetActive(!pauseMenu.activeSelf);
+        statsPanel.SetActive(!statsPanel.activeSelf);
+    }
 
-        if (!pauseMenu.activeSelf)
-        {
-            Time.timeScale = 1;
-        }
-        else
-        {
-            Time.timeScale = 0;
-        }
+    public void SetToolTipText(string txt)
+    {
+        visibleText.text = txt;
+        sizeText.text = txt;
     }
 
     /// <summary>
@@ -324,6 +326,40 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void ShowInGameMenu()
+    {
+       ingameMenu.SetActive(!ingameMenu.activeSelf);
+
+
+
+        if (!ingameMenu.activeSelf)
+        {
+            Time.timeScale = 1;
+        }
+        else
+        {
+            ShowPauseMenu();
+            Time.timeScale = 0;
+        }
+    }
+
+    public void ShowPauseMenu()
+    {
+        pauseMenu.SetActive(true);
+    }
+
+    public void ShowOptionsMenu()
+    {
+        pauseMenu.SetActive(false);
+        optionsMenu.SetActive(true);
+    }
+    public void Resume()
+    {
+
+        ShowInGameMenu();
+    }
+
+    
     public void Restart()
     {
 
@@ -332,10 +368,19 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void Back()
+    {
+        optionsMenu.SetActive(false);
+        pauseMenu.SetActive(true);      
+    }
+
     public void QuitGame()
     {
         Application.Quit();
     }
+
+
+
 
     // Awake is called on loading the script
     private void Awake()
