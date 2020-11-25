@@ -10,24 +10,75 @@ using UnityEngine;
 /// </summary>
 public abstract class Tower: MonoBehaviour
 {
-    
-    private SpriteRenderer mySpriteRenderer;
+    [SerializeField]
+    private string towerType;
 
-    private Monster target;
-    public Monster Target
+    public string TowerType
     {
         get
         {
-            return target;
+            return towerType;
         }
     }
-    private Queue<Monster> monsterTargets = new Queue<Monster>();
 
-    //Bool that determines whether or not the tower is allowed to attack
-    private bool canAttack = true;
+    private int towerLevel = 1;
 
-    //Time between attacks
-    private float attackTimer;
+    public int TowerLevel
+    {
+        get
+        {
+            return towerLevel;
+        }
+
+        protected set
+        {
+            towerLevel = value;
+        }
+    }
+
+    public int Price { get; set; }
+
+    [SerializeField]
+    private float range;
+
+    public float Range
+    {
+        get
+        {
+            return range;
+        }
+        set
+        {
+            range = value;
+        }
+    }
+
+    private Vector3 towerRange;
+
+    public Vector3 TowerRange
+    {
+        get
+        {
+            return towerRange;
+        }
+        set
+        {
+            towerRange = value;
+        }
+    }
+
+    private SpriteRenderer rangeRenderer;
+
+    [SerializeField]
+    private float damage;
+
+    public float Damage
+    {
+        get
+        {
+            return damage;
+        }
+    }
 
     //Time needed before a tower is allowed to attack again.
     [SerializeField]
@@ -50,33 +101,19 @@ public abstract class Tower: MonoBehaviour
     }
 
     [SerializeField]
-    private float damage;
+    private string debuffType;
 
-    public float Damage
+    public string DebuffType
     {
         get
         {
-            return damage;
+            return debuffType;
         }
-    }
-
-    [SerializeField]
-    private float debuffDuration;
-
-    public float DebuffDuration
-    {
-        get
-        {
-            return debuffDuration;
-        }
-
         set
         {
-            this.debuffDuration = value;
+            debuffType = value;
         }
     }
-
-    public int Price { get; set; }
 
     [SerializeField]
     private float procChance;
@@ -94,6 +131,47 @@ public abstract class Tower: MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private float debuffDuration;
+
+    public float DebuffDuration
+    {
+        get
+        {
+            return debuffDuration;
+        }
+
+        set
+        {
+            this.debuffDuration = value;
+        }
+    }  
+
+    public TowerUpgrade[] Upgrades { get; protected set;}
+
+    private Monster target;
+    public Monster Target
+    {
+        get
+        {
+            return target;
+        }
+    }
+    private Queue<Monster> monsterTargets = new Queue<Monster>();
+
+    //Bool that determines whether or not the tower is allowed to attack
+    private bool canAttack = true;
+
+    //Time between attacks
+    private float attackTimer;
+
+    private void Awake()
+    {
+        TowerLevel = 1;
+        rangeRenderer = GetComponent<SpriteRenderer>();
+        towerRange = new Vector3(range, range, 0);
+        transform.localScale = towerRange;
+    }
 
 
     /// <summary>
@@ -101,9 +179,39 @@ public abstract class Tower: MonoBehaviour
     /// </summary>
     public void Select()
     {
-
         //shows and hides the range when tower is selected.
-        mySpriteRenderer.enabled = !mySpriteRenderer.enabled;
+        rangeRenderer.enabled = !rangeRenderer.enabled;
+    }
+
+    public void GetStats()
+    {
+
+        string tooltip = this.SetTooltip();
+        GameManager.Instance.SetToolTipText(tooltip);
+        GameManager.Instance.ShowStats();
+    }
+
+
+    public virtual string SetTooltip()
+    {
+
+
+        return string.Format("<size=65><b>{0}</b></size>\n\n" +
+                             "Level: {1}\n" +
+                             "Damage: {2}\n" +
+                             "Attack Speed: Every {3} sec\n" +
+                             "Range: {4}\n" +
+                             "Debuff: {5}\n" +
+                             "Chance: {6}%\n" +
+                             "Duration: {7}",
+                             towerType,
+                             towerLevel,
+                             damage,
+                             attackCooldown,
+                             range,
+                             debuffType,
+                             procChance,
+                             debuffDuration);
     }
 
     /// <summary>
@@ -206,16 +314,11 @@ public abstract class Tower: MonoBehaviour
 
     
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        mySpriteRenderer = GetComponent<SpriteRenderer>();
-    }
+    
 
     // Update is called once per frame
     void Update()
     {
-
         Attack();
     }
 }

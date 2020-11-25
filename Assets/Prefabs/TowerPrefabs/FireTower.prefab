@@ -60,14 +60,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e26f7e3797fdb64da21a64869cb1e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 5
+  towerType: Fire Tower
+  range: 450
+  damage: 3
+  attackCooldown: 0.75
   projectileType: Fire Bullet
   projectileSpeed: 15
-  damage: 1
-  debuffDuration: 5
+  debuffType: Burn
   procChance: 100
-  tickTime: 1
-  tickDamage: 4
+  debuffDuration: 0.25
+  tickTime: 0.25
+  tickDamage: 3
 --- !u!1 &9190758407103770385
 GameObject:
   m_ObjectHideFlags: 0

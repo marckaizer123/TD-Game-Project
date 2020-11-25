@@ -57,10 +57,10 @@ public class TowerButton : MonoBehaviour
         }
     }
 
-    public void ShowInfo (string type)
+    public void ShowInfo ()
     {
-        GameManager.Instance.SetToolTipText(type);
-        GameManager.Instance.ShowStats();
+        towerPrefab.GetComponentInChildren<Tower>().GetStats();
+   
     }
 
 

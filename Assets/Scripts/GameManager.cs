@@ -88,9 +88,6 @@ public class GameManager : Singleton<GameManager>
     private GameObject statsPanel;
 
     [SerializeField]
-    private TextMeshProUGUI sizeText;
-
-    [SerializeField]
     private TextMeshProUGUI visibleText;
 
     private bool gameOver = false;
@@ -265,6 +262,7 @@ public class GameManager : Singleton<GameManager>
         if(selectedTower != null)
         {
             selectedTower.Select();
+            
         }
 
         //Sets the selected tower.
@@ -273,7 +271,13 @@ public class GameManager : Singleton<GameManager>
         //Selects the Tower
         selectedTower.Select();
 
+        selectedTower.GetStats();
+
         gamePanel.SetActive(true);
+        statsPanel.SetActive(true);
+
+
+
 
         sellText.text = "Sell : " + selectedTower.Price/2;
     }
@@ -286,7 +290,10 @@ public class GameManager : Singleton<GameManager>
         }
 
         selectedTower = null;
+
         gamePanel.SetActive(false);
+
+        statsPanel.SetActive(false);
     }
 
     /// <summary>
@@ -311,8 +318,90 @@ public class GameManager : Singleton<GameManager>
     public void SetToolTipText(string txt)
     {
         visibleText.text = txt;
-        sizeText.text = txt;
     }
+
+
+    /*public void GetStats(string type)
+    {
+        
+        string tooltip = string.Empty;
+
+        switch (type)
+        {
+            case "Fire Tower":
+                FireTower fireTower = selectedTower.GetComponentInChildren<FireTower>();
+                tooltip = string.Format("<color=#ffa500ff><size=65><b>Fire Tower</b></size>\n\n" +
+                                        "Level: {0}\n" +
+                                        "Damage: {1}\n" +
+                                        "Range: {2}\n" +
+                                        "Burn Chance: {3}%\n" +
+                                        "Burn Damage: {4}\n" +
+                                        "Debuff Duration: {5} sec\n\n" +
+                                        "Can burn enemies hit.</color>",
+                                        fireTower.TowerLevel,
+                                        fireTower.Damage,
+                                        fireTower.Range,
+                                        fireTower.ProcChance,
+                                        fireTower.TickDamage,
+                                        fireTower.DebuffDuration);
+                break;
+
+            case "Frost Tower":
+                FrostTower frostTower = selectedTower.GetComponentInChildren<FrostTower>();
+                tooltip = string.Format("<color=#00ffffff><size=65><b>Frost Tower</b></size>\n\n" +
+                                        "Level: {0}\n" +
+                                        "Damage: {1}\n" +
+                                        "Range: {2}\n" +
+                                        "Proc: {3}%\n" +
+                                        "Slow Chance: {4}\n" +
+                                        "Slow Duration: {5} sec\n\n" +
+                                        "Can slow enemies hit.</color>",
+                                        frostTower.TowerLevel,
+                                        frostTower.Damage,
+                                        frostTower.Range,
+                                        frostTower.ProcChance,
+                                        frostTower.SlowFactor,
+                                        frostTower.DebuffDuration);
+                break;
+
+            case "Poison Tower":
+                PoisonTower poisonTower = selectedTower.GetComponentInChildren<PoisonTower>();
+                tooltip = string.Format("<color=#00ff00ff><size=65><b>Poison Tower</b></size>\n\n" +
+                                        "Level: {0}\n" +
+                                        "Damage: {1}\n" +
+                                        "Range: {2}\n" +
+                                        "Poison Chance: {3}%\n" +
+                                        "Poison Damage: {4}\n" +
+                                        "Poison Duration: {5} sec\n\n" +
+                                        "Can poison enemies hit.</color>",
+                                        poisonTower.TowerLevel,
+                                        poisonTower.Damage,
+                                        poisonTower.Range,
+                                        poisonTower.ProcChance,
+                                        poisonTower.TickDamage,
+                                        poisonTower.DebuffDuration);
+                break;
+
+            case "Storm Tower":
+                StormTower stormTower = selectedTower.GetComponentInChildren<StormTower>();
+                tooltip = string.Format("<color=#add8e6ff><size=65><b>Storm Tower</b></size>\n\n" +
+                                        "Level: {0}\n" +
+                                        "Damage: {1}\n" +
+                                        "Range: {2}\n" +
+                                        "Stun Chance: {3}%\n" +
+                                        "Stun Duration: {4} sec\n\n" +
+                                        "Can stun enemies hit.</color>",
+                                        stormTower.TowerLevel,
+                                        stormTower.Damage,
+                                        stormTower.Range,
+                                        stormTower.ProcChance,
+                                        stormTower.DebuffDuration);
+                break;
+        }
+
+        GameManager.Instance.SetToolTipText(tooltip);
+        GameManager.Instance.ShowStats();
+    }*/
 
     /// <summary>
     /// Game Over code

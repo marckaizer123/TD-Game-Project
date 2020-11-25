@@ -28,12 +28,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ad12d8f65146f40a57ce00677f4fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 0.5
+  towerType: Storm Tower
+  range: 550
+  damage: 10
+  attackCooldown: 3
   projectileType: Storm Bullet
-  projectileSpeed: 7
-  damage: 5
-  debuffDuration: 1
-  procChance: 0
+  projectileSpeed: 25
+  debuffType: Stun
+  procChance: 50
+  debuffDuration: 0.75
 --- !u!1 &1636994856130263565
 GameObject:
   m_ObjectHideFlags: 0

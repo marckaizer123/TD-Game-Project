@@ -109,12 +109,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccef78187f79ca34c899bd642b80ffa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 1
+  towerType: Poison Tower
+  range: 300
+  damage: 1
+  attackCooldown: 2
   projectileType: Poison Bullet
-  projectileSpeed: 5
-  damage: 2
-  debuffDuration: 7
+  projectileSpeed: 10
+  debuffType: Poison
   procChance: 100
+  debuffDuration: 5
+  tickTime: 0.5
+  tickDamage: 2
 --- !u!1 &8421766778484969870
 GameObject:
   m_ObjectHideFlags: 0

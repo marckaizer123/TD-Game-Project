@@ -8,6 +8,7 @@ using UnityEngine;
 public class Hover :Singleton<Hover>
 {
 
+    private Vector3 circleSize;
 
     private void FollowMouse()
     {
@@ -36,10 +37,11 @@ public class Hover :Singleton<Hover>
 
 
         //Shows the range circle of the selected tower.
-        transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
-        transform.GetChild(1).transform.localScale = towerPrefab.transform.GetChild(1).transform.localScale;
+        transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;     
         transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = towerPrefab.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
         transform.GetChild(1).GetComponent<SpriteRenderer>().color = towerPrefab.transform.GetChild(1).GetComponent<SpriteRenderer>().color;
+        circleSize = new Vector3(towerPrefab.transform.GetChild(1).GetComponent<Tower>().Range, towerPrefab.transform.GetChild(1).GetComponent<Tower>().Range, 0);
+        transform.GetChild(1).transform.localScale = circleSize;
 
 
     }

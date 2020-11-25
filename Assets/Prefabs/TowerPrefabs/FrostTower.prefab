@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2963983728886696046}
   m_Layer: 0
-  m_Name: IceTower
+  m_Name: FrostTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,13 +60,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f859ee1b2f5f8d24c8c76ea0ea480950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 2
-  projectileType: Ice Bullet
-  projectileSpeed: 16
-  damage: 2
-  debuffDuration: 5
+  towerType: Frost Tower
+  range: 300
+  damage: 3
+  attackCooldown: 1.5
+  projectileType: Frost Bullet
+  projectileSpeed: 10
+  debuffType: Slow
   procChance: 100
-  slowFactor: 50
+  debuffDuration: 5
+  slowFactor: 33
 --- !u!1 &6871508992387368369
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,7 +81,7 @@ GameObject:
   - component: {fileID: 2149314289280294811}
   - component: {fileID: 7742878461090222395}
   m_Layer: 0
-  m_Name: IceTowerSprite
+  m_Name: FrostTowerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

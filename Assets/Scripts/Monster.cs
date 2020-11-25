@@ -68,6 +68,9 @@ public class Monster : MonoBehaviour
     private Vector3 destination;
 
     
+    private Animator monsterAnimator;
+
+    
 
     /// <summary>
     /// Moves the monster
@@ -78,7 +81,7 @@ public class Monster : MonoBehaviour
         if (allowMovement)
         {
             
-            RotateMonster();
+            //RotateMonster();
 
             transform.position = Vector3.MoveTowards(transform.position, destination, currentSpeed * Time.deltaTime);
 
@@ -86,6 +89,8 @@ public class Monster : MonoBehaviour
             {
                 if (path != null && path.Count > 0)
                 {
+                    Animate(GridPosition, path.Peek().GridPosition);
+
                     GridPosition = path.Peek().GridPosition;
                     destination = path.Pop().WorldPosition;
                 }
@@ -93,10 +98,38 @@ public class Monster : MonoBehaviour
         }
     }
 
+    private void Animate(Point currentPos, Point nextPos)
+    {
+        if (currentPos.Y > nextPos.Y)
+        {
+            //moving down
+            monsterAnimator.SetInteger("Horizontal", 0);
+            monsterAnimator.SetInteger("Vertical", -1);
+        }
+        else if (currentPos.Y < nextPos.Y)
+        {
+            //moving up
+            monsterAnimator.SetInteger("Horizontal", 0);
+            monsterAnimator.SetInteger("Vertical", 1);
+        }
+        else if (currentPos.X > nextPos.X)
+        {
+            //moving left
+            monsterAnimator.SetInteger("Horizontal", -1);
+            monsterAnimator.SetInteger("Vertical", 0);
+        }
+        else if (currentPos.X < nextPos.X)
+        {
+            //moving right
+            monsterAnimator.SetInteger("Horizontal", 1);
+            monsterAnimator.SetInteger("Vertical", 0);
+        }
+    }
+
     /// <summary>
     /// Rotates the monster based on the direction it will move into.
     /// </summary>
-    private void RotateMonster()
+    /*private void RotateMonster()
     {
         //Calculates the direction of the monsters next destination relative to its current position
         Vector3 faceDirection = destination - transform.position;
@@ -108,7 +141,7 @@ public class Monster : MonoBehaviour
         //rotates only the monster sprite of the monster game object.
         transform.GetChild(0).transform.rotation = Quaternion.AngleAxis(rotationAngle, Vector3.forward);
 
-    }
+    }*/
 
     /// <summary>
     /// Sets the path that the monster will follow.
@@ -118,17 +151,25 @@ public class Monster : MonoBehaviour
         if(newPath != null) // checks if the new path exists. 
         {
             this.path = newPath; // if the path exists, then the monster's path will be set to the new path.
-            GridPosition = path.Peek().GridPosition; 
+
+            GridPosition = path.Peek().GridPosition; // sets the new grid position of the monster.
+
+            Animate(GridPosition, path.Peek().GridPosition);
+
             destination = path.Pop().WorldPosition; // as the monsters reach their destination, update the destination to the next worldposition in the queue.
         }
     }
 
-    //Spawns the monsters. Uses scale to make the monster start from a smaller size then scale into a bigger size to give the effect of coming through a portal.
+    /// <summary>
+    /// Spawns the monsters. Uses scale to make the monster start from a smaller size then scale into a bigger size to give the effect of coming through a portal.
+    /// </summary>
     public void Spawn()
     {
 
         transform.position = LevelManager.Instance.StartPortal.transform.position; // sets the position where the monster will spawn.
-        
+
+        monsterAnimator = transform.GetChild(0).GetComponent<Animator>();
+
         this.health.CurrentVal = this.health.MaxVal;
 
         //allowMovement = false; // disallows movement while the monster is scaling.
