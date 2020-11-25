@@ -118,7 +118,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private TextMeshProUGUI sellText;
 
-
+    [SerializeField]
+    private TextMeshProUGUI upgradeText;
     
 
 
@@ -254,15 +255,18 @@ public class GameManager : Singleton<GameManager>
 
             Destroy(selectedTower.transform.parent.gameObject);
             selectedTower.GetComponentInParent<TileScript>().IsEmpty = true;
-            DeselectTower();        }
+            DeselectTower();        
+        }
+
+
     }
 
     public void SelectTower(Tower tower)
     {
-        if(selectedTower != null)
+        if (selectedTower != null)
         {
             selectedTower.Select();
-            
+
         }
 
         //Sets the selected tower.
@@ -276,10 +280,17 @@ public class GameManager : Singleton<GameManager>
         gamePanel.SetActive(true);
         statsPanel.SetActive(true);
 
+        sellText.text = "Sell : " + selectedTower.Price / 2;
+
+        if(selectedTower.NextUpgrade != null)
+        {
+            upgradeText.text = "Upgrade: " + selectedTower.NextUpgrade.Price;
+        }
+
+        
+        CheckUpgrade();
 
 
-
-        sellText.text = "Sell : " + selectedTower.Price/2;
     }
 
     public void DeselectTower()
@@ -320,88 +331,43 @@ public class GameManager : Singleton<GameManager>
         visibleText.text = txt;
     }
 
-
-    /*public void GetStats(string type)
+    public void UpgradeTower()
     {
-        
-        string tooltip = string.Empty;
-
-        switch (type)
+        if (selectedTower!= null)
         {
-            case "Fire Tower":
-                FireTower fireTower = selectedTower.GetComponentInChildren<FireTower>();
-                tooltip = string.Format("<color=#ffa500ff><size=65><b>Fire Tower</b></size>\n\n" +
-                                        "Level: {0}\n" +
-                                        "Damage: {1}\n" +
-                                        "Range: {2}\n" +
-                                        "Burn Chance: {3}%\n" +
-                                        "Burn Damage: {4}\n" +
-                                        "Debuff Duration: {5} sec\n\n" +
-                                        "Can burn enemies hit.</color>",
-                                        fireTower.TowerLevel,
-                                        fireTower.Damage,
-                                        fireTower.Range,
-                                        fireTower.ProcChance,
-                                        fireTower.TickDamage,
-                                        fireTower.DebuffDuration);
-                break;
+            if (selectedTower.NextUpgrade!=null && Currency >= selectedTower.NextUpgrade.Price)
+            {
 
-            case "Frost Tower":
-                FrostTower frostTower = selectedTower.GetComponentInChildren<FrostTower>();
-                tooltip = string.Format("<color=#00ffffff><size=65><b>Frost Tower</b></size>\n\n" +
-                                        "Level: {0}\n" +
-                                        "Damage: {1}\n" +
-                                        "Range: {2}\n" +
-                                        "Proc: {3}%\n" +
-                                        "Slow Chance: {4}\n" +
-                                        "Slow Duration: {5} sec\n\n" +
-                                        "Can slow enemies hit.</color>",
-                                        frostTower.TowerLevel,
-                                        frostTower.Damage,
-                                        frostTower.Range,
-                                        frostTower.ProcChance,
-                                        frostTower.SlowFactor,
-                                        frostTower.DebuffDuration);
-                break;
+                selectedTower.Upgrade();
+                CheckUpgrade();
 
-            case "Poison Tower":
-                PoisonTower poisonTower = selectedTower.GetComponentInChildren<PoisonTower>();
-                tooltip = string.Format("<color=#00ff00ff><size=65><b>Poison Tower</b></size>\n\n" +
-                                        "Level: {0}\n" +
-                                        "Damage: {1}\n" +
-                                        "Range: {2}\n" +
-                                        "Poison Chance: {3}%\n" +
-                                        "Poison Damage: {4}\n" +
-                                        "Poison Duration: {5} sec\n\n" +
-                                        "Can poison enemies hit.</color>",
-                                        poisonTower.TowerLevel,
-                                        poisonTower.Damage,
-                                        poisonTower.Range,
-                                        poisonTower.ProcChance,
-                                        poisonTower.TickDamage,
-                                        poisonTower.DebuffDuration);
-                break;
+                SetToolTipText(selectedTower.SetTooltip());
 
-            case "Storm Tower":
-                StormTower stormTower = selectedTower.GetComponentInChildren<StormTower>();
-                tooltip = string.Format("<color=#add8e6ff><size=65><b>Storm Tower</b></size>\n\n" +
-                                        "Level: {0}\n" +
-                                        "Damage: {1}\n" +
-                                        "Range: {2}\n" +
-                                        "Stun Chance: {3}%\n" +
-                                        "Stun Duration: {4} sec\n\n" +
-                                        "Can stun enemies hit.</color>",
-                                        stormTower.TowerLevel,
-                                        stormTower.Damage,
-                                        stormTower.Range,
-                                        stormTower.ProcChance,
-                                        stormTower.DebuffDuration);
-                break;
+                sellText.text = "Sell : " + selectedTower.Price / 2;                                         
+            }
+        }
+    }
+
+    /// <summary>
+    /// Greys out the upgrade button if player can't afford it.
+    /// </summary>
+    public void CheckUpgrade()
+    {
+        if (selectedTower.NextUpgrade == null)
+        {
+            gamePanel.transform.GetChild(1).GetComponent<Image>().color = Color.grey;
         }
 
-        GameManager.Instance.SetToolTipText(tooltip);
-        GameManager.Instance.ShowStats();
-    }*/
+        else if (currency >= selectedTower.NextUpgrade.Price)
+        {
+            gamePanel.transform.GetChild(1).GetComponent<Image>().color = Color.white;
+        }
+
+        else
+        {
+            gamePanel.transform.GetChild(1).GetComponent<Image>().color = Color.grey;
+        }
+    }
 
     /// <summary>
     /// Game Over code

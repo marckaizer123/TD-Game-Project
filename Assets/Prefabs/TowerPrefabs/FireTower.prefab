@@ -62,15 +62,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerType: Fire Tower
   range: 450
-  damage: 3
-  attackCooldown: 0.75
+  damage: 5
+  attackCooldown: 1.5
   projectileType: Fire Bullet
   projectileSpeed: 15
   debuffType: Burn
   procChance: 100
-  debuffDuration: 0.25
-  tickTime: 0.25
-  tickDamage: 3
+  debuffDuration: 2
+  tickTime: 2
+  tickDamage: 5
 --- !u!1 &9190758407103770385
 GameObject:
   m_ObjectHideFlags: 0

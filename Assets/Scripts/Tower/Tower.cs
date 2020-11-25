@@ -21,7 +21,7 @@ public abstract class Tower: MonoBehaviour
         }
     }
 
-    private int towerLevel = 1;
+    private int towerLevel;
 
     public int TowerLevel
     {
@@ -35,6 +35,7 @@ public abstract class Tower: MonoBehaviour
             towerLevel = value;
         }
     }
+
 
     public int Price { get; set; }
 
@@ -83,6 +84,19 @@ public abstract class Tower: MonoBehaviour
     //Time needed before a tower is allowed to attack again.
     [SerializeField]
     private float attackCooldown;
+
+    public float AttackCooldown
+    {
+        get
+        {
+            return attackCooldown;
+        }
+
+        set
+        {
+            attackCooldown = value;
+        }
+    }
 
     //The projectile that will be shot by the tower.
     [SerializeField]
@@ -147,7 +161,23 @@ public abstract class Tower: MonoBehaviour
         }
     }  
 
+    //Reference to the array containing all the upgrades of a tower.
     public TowerUpgrade[] Upgrades { get; protected set;}
+
+
+    //Reference to the next upgrade on the array.
+    public TowerUpgrade NextUpgrade
+    {
+        get
+        {
+            if (Upgrades.Length >= towerLevel)
+            {
+                return Upgrades[towerLevel-1];
+            }
+
+            return null;
+        }
+    }
 
     private Monster target;
     public Monster Target
@@ -183,6 +213,9 @@ public abstract class Tower: MonoBehaviour
         rangeRenderer.enabled = !rangeRenderer.enabled;
     }
 
+    /// <summary>
+    /// Gets the stats of the tower and displays it on the stats panel.
+    /// </summary>
     public void GetStats()
     {
 
@@ -191,7 +224,10 @@ public abstract class Tower: MonoBehaviour
         GameManager.Instance.ShowStats();
     }
 
-
+    /// <summary>
+    /// Sets the text that will be shown in the stat panel.
+    /// </summary>
+    /// <returns></returns>
     public virtual string SetTooltip()
     {
 
@@ -213,6 +249,20 @@ public abstract class Tower: MonoBehaviour
                              procChance,
                              debuffDuration);
     }
+
+    public virtual void Upgrade()
+    {
+        //Reduce currency according to upgrade price.
+        GameManager.Instance.Currency -= NextUpgrade.Price;
+        Price += NextUpgrade.Price;
+        this.damage += NextUpgrade.Damage;
+        this.procChance += NextUpgrade.ProcChance;
+        this.range += NextUpgrade.Range;
+        this.AttackCooldown -= NextUpgrade.AttackCooldown;
+        this.debuffDuration +=  NextUpgrade.DebuffDuration;
+        TowerLevel++;
+    }
+    
 
     /// <summary>
     /// Script that runs upon an enemy entering the range of the tower.

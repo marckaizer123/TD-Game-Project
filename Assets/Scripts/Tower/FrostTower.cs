@@ -19,6 +19,48 @@ public class FrostTower : Tower
         }
     }
 
+    private void Start()
+    {
+        //Sets the parameters of the available upgrades for this tower.
+        Upgrades = new TowerUpgrade[]
+        {
+            new TowerUpgrade(Price/2,   //Price
+                             2.5f,         //Damage
+                             25,         //Range
+                             0,         //Attack cooldown
+                             0.5f,         //Duration
+                             0,         //ProcChance
+                             3,         //TickDamage
+                             10),        //SlowFactor
+
+            new TowerUpgrade(Price,   //Price
+                             2.5f,         //Damage
+                             25,         //Range
+                             0,         //Attack cooldown
+                             0.5f,         //Duration
+                             0,         //ProcChance
+                             3,         //TickDamage
+                             10),        //SlowFactor
+
+            new TowerUpgrade(Price,     //Price
+                             2.5f,       //Damage
+                             25,         //Range
+                             0,         //Attack cooldown
+                             0.5f,         //Duration
+                             0,         //ProcChance
+                             3,         //TickDamage
+                             10),        //SlowFactor
+
+            new TowerUpgrade(Price*2,   //Price
+                             5,         //Damage
+                             75,         //Range
+                             0,         //Attack cooldown
+                             0.5f,         //Duration
+                             0,         //ProcChance
+                             3,         //TickDamage
+                             10),        //SlowFactor
+        };
+    }
 
     public override Debuff GetDebuff()
     {
@@ -36,12 +78,11 @@ public class FrostTower : Tower
 
     }
 
-    private void Start()
+    public override void Upgrade()
     {
-        Upgrades = new TowerUpgrade[]
-        {
-            new TowerUpgrade(2, 2, 2, .5f, 5, 1),
-            new TowerUpgrade(2, 2, 2, .5f, 5, 1)
-        };
+        this.SlowFactor += NextUpgrade.SlowFactor;
+        base.Upgrade();
     }
+
+    
 }

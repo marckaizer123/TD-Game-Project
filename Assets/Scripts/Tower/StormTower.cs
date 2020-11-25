@@ -4,7 +4,49 @@ using UnityEngine;
 
 public class StormTower : Tower
 {
-    
+    private void Start()
+    {
+        //Sets the parameters of the available upgrades for this tower.
+        Upgrades = new TowerUpgrade[]
+        {
+            new TowerUpgrade(Price/2,   //Price
+                             5,         //Damage
+                             25,         //Range
+                             .1f,         //Attack cooldown
+                             0,         //Duration
+                             5,         //ProcChance
+                             3,         //TickDamage
+                             0),        //SlowFactor
+
+            new TowerUpgrade(Price,   //Price
+                             5,         //Damage
+                             25,         //Range
+                             .1f,         //Attack cooldown
+                             0,         //Duration
+                             5,         //ProcChance
+                             3,         //TickDamage
+                             0),        //SlowFactor
+
+            new TowerUpgrade(Price,   //Price
+                             5,         //Damage
+                             50,         //Range
+                             .1f,         //Attack cooldown
+                             0,         //Duration
+                             5,         //ProcChance
+                             3,         //TickDamage
+                             0),        //SlowFactor
+
+            new TowerUpgrade(Price*2,   //Price
+                             10,         //Damage
+                             50,         //Range
+                             .2f,         //Attack cooldown
+                             .25f,         //Duration
+                             10,         //ProcChance
+                             3,         //TickDamage
+                             0),        //SlowFactor
+
+        };
+    }
 
     public override Debuff GetDebuff()
     {
@@ -19,12 +61,5 @@ public class StormTower : Tower
 
     }
 
-    private void Start()
-    {
-        Upgrades = new TowerUpgrade[]
-        {
-            new TowerUpgrade(2, 2, 2, .5f, 5, 1),
-            new TowerUpgrade(2, 2, 2, .5f, 5, 1)
-        };
-    }
+    
 }

@@ -33,9 +33,9 @@ MonoBehaviour:
   damage: 10
   attackCooldown: 3
   projectileType: Storm Bullet
-  projectileSpeed: 25
+  projectileSpeed: 50
   debuffType: Stun
-  procChance: 50
+  procChance: 15
   debuffDuration: 0.75
 --- !u!1 &1636994856130263565
 GameObject:

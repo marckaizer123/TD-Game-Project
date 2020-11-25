@@ -43,6 +43,9 @@ public class TowerButton : MonoBehaviour
         GameManager.Instance.CurrencyChange += new CurrencyChanged(PriceCheck);
     }
 
+    /// <summary>
+    /// Compares the price of a tower against the currency of the player. Towers that cannot be bought will have their buttons greyed out.
+    /// </summary>
     private void PriceCheck()
     {
         if (price <= GameManager.Instance.Currency)
@@ -57,6 +60,9 @@ public class TowerButton : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Display the level 1 stats of the tower when you hover on its icon. Probably should be modified/removed after converting to touch controls later. 
+    /// </summary>
     public void ShowInfo ()
     {
         towerPrefab.GetComponentInChildren<Tower>().GetStats();

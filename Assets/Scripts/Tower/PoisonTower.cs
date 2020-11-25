@@ -24,10 +24,44 @@ public class PoisonTower : Tower
 
     private void Start()
     {
+        //Sets the parameters of the available upgrades for this tower.
         Upgrades = new TowerUpgrade[]
         {
-            new TowerUpgrade(2, 2, 2, .5f, 5, 1),
-            new TowerUpgrade(2, 2, 2, .5f, 5, 1)
+            new TowerUpgrade(Price/2,   //Price
+                             1,         //Damage
+                             25,         //Range
+                             0,         //Attack cooldown
+                             1,         //Duration
+                             5,         //ProcChance
+                             2,         //TickDamage
+                             0),        //SlowFactor
+
+            new TowerUpgrade(Price/2,   //Price
+                             1,         //Damage
+                             25,         //Range
+                             0,         //Attack cooldown
+                             1,         //Duration
+                             5,         //ProcChance
+                             2,         //TickDamage
+                             0),        //SlowFactor
+
+            new TowerUpgrade(Price/2,   //Price
+                             1,         //Damage
+                             25,         //Range
+                             0,         //Attack cooldown
+                             1,         //Duration
+                             5,         //ProcChance
+                             2,         //TickDamage
+                             0),        //SlowFactor
+
+            new TowerUpgrade(Price,   //Price
+                             1,         //Damage
+                             25,         //Range
+                             0,         //Attack cooldown
+                             2,         //Duration
+                             5,         //ProcChance
+                             3,         //TickDamage
+                             0),        //SlowFactor
         };
     }
 
@@ -45,6 +79,12 @@ public class PoisonTower : Tower
                              base.SetTooltip(),
                              tickDamage/tickTime);
 
+    }
+
+    public override void Upgrade()
+    {
+        this.TickDamage -= NextUpgrade.TickDamage;
+        base.Upgrade();
     }
 
 

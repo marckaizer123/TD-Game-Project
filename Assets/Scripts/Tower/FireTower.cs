@@ -22,6 +22,48 @@ public class FireTower : Tower
         set { tickDamage = value; }
     }
 
+    private void Start()
+    {
+        //Sets the parameters of the available upgrades for this tower.
+        Upgrades = new TowerUpgrade[]
+        {
+            new TowerUpgrade(Price/2,   //Price
+                             2,         //Damage
+                             0,         //Attack cooldown
+                             0,         //Range
+                             0,         //Duration
+                             5,         //ProcChance
+                             2,         //TickDamage
+                             0),        //SlowFactor
+
+            new TowerUpgrade(Price,   //Price
+                             2,         //Damage
+                             0,         //Range
+                             0,         //Attack cooldown
+                             0,         //Duration
+                             5,         //ProcChance
+                             2,         //TickDamage
+                             0),        //SlowFactor
+
+            new TowerUpgrade(Price,   //Price
+                             2,         //Damage
+                             50,         //Range
+                             0,         //Attack cooldown
+                             0,         //Duration
+                             5,         //ProcChance
+                             2,         //TickDamage
+                             0),        //SlowFactor
+
+            new TowerUpgrade(Price*2,   //Price
+                             4,         //Damage
+                             100,         //Range
+                             0.5f,         //Attack cooldown
+                             0,         //Duration
+                             10,         //ProcChance
+                             4,         //TickDamage
+                             0),        //SlowFactor
+        };
+    }
 
     public override Debuff GetDebuff()
     {
@@ -30,7 +72,7 @@ public class FireTower : Tower
 
     public override string SetTooltip()
     {
-        return string.Format("<color=#ffa500ff> " + 
+        return string.Format("<color=#ffa500ff>" + 
                              "{0}\n" +
                              "Damage Per Second: {1}" +
                              "</color>",
@@ -39,13 +81,12 @@ public class FireTower : Tower
 
     }
 
-    private void Start()
+    public override void Upgrade()
     {
-        Upgrades = new TowerUpgrade[]
-        {
-            new TowerUpgrade(2, 2, 2, .5f, 5, 1),
-            new TowerUpgrade(2, 2, 2, .5f, 5, 1)
-        };
+        this.TickDamage += NextUpgrade.TickDamage;
+        base.Upgrade();
     }
+
+
 
 }
