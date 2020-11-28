@@ -290,6 +290,8 @@ public abstract class Tower: MonoBehaviour
         {
             //sets the tower's target to null once their target leaves their range.
             target = null;
+
+            
         }
     }
 
@@ -298,20 +300,7 @@ public abstract class Tower: MonoBehaviour
     /// </summary>
     private void Attack()
     {
-        if (!canAttack)
-        {
-            //attack timer increases whenever the tower cannot attack.
-            attackTimer += Time.deltaTime;
-
-            if (attackTimer >= attackCooldown)
-            {
-                //allows the tower to attack again after the attack cooldown has been reached.
-                canAttack = true;
-
-                //resets the attack timer.
-                attackTimer = 0;
-            }
-        }
+        
 
 
         //Check if tower does not have a target and there is a monster in range
@@ -343,6 +332,21 @@ public abstract class Tower: MonoBehaviour
             }
         }
 
+        if (!canAttack)
+        {
+            //attack timer increases whenever the tower cannot attack.
+            attackTimer += Time.deltaTime;
+
+            if (attackTimer >= attackCooldown)
+            {
+                //allows the tower to attack again after the attack cooldown has been reached.
+                canAttack = true;
+
+                //resets the attack timer.
+                attackTimer = 0;
+            }
+        }
+
 
     }
 
@@ -351,6 +355,7 @@ public abstract class Tower: MonoBehaviour
     /// </summary>
     private void Shoot()
     {
+        //AudioManager.Instance.PlaySFX("Shoot");
         // gets a projectile from the pool.
         Projectile projectile = (Projectile)GameManager.Instance.Pool.GetObject(projectileType).GetComponent<Projectile>();
 

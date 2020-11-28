@@ -20,6 +20,35 @@ public class Monster : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private float currentSpeed;
+
+    public float CurrentSpeed
+    {
+        get
+        {
+            return currentSpeed;
+        }
+        set
+        {
+            this.currentSpeed = value;
+        }
+    }
+    [SerializeField]
+    private int goldReward;
+
+    public int GoldReward
+    {
+        get
+        {
+            return goldReward;
+        }
+        set
+        {
+            goldReward = value;
+        }
+    }
+
     //public Dictionary<Point, TileScript> Tiles { get; set; }
 
     //public Dictionary<Debuff, > newDebuff = new Dictionary<Debuff, bool>();
@@ -44,20 +73,7 @@ public class Monster : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    private float currentSpeed;
-
-    public float CurrentSpeed
-    {
-        get
-        {
-            return currentSpeed;
-        }
-        set
-        {
-            this.currentSpeed = value;
-        }
-    }
+    
 
     public float MaxSpeed { get; set; }
 
@@ -172,7 +188,7 @@ public class Monster : MonoBehaviour
 
         this.health.CurrentVal = this.health.MaxVal;
 
-        //allowMovement = false; // disallows movement while the monster is scaling.
+        AudioManager.Instance.PlaySFX("Spawn");
 
         StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(1, 1), false));// starts the scaling function alongside the spawn function.
 
@@ -262,10 +278,13 @@ public class Monster : MonoBehaviour
         if (isActiveAndEnabled)
         {
             health.CurrentVal = Mathf.Clamp(health.CurrentVal - damage, 0, health.MaxVal) ;
+            AudioManager.Instance.PlaySFX("EnemyDamaged");
 
             if (health.CurrentVal <= 0)
             {
-                GameManager.Instance.Currency += 25;
+                AudioManager.Instance.PlaySFX("EnemyDies");
+                GameManager.Instance.Currency += this.goldReward;
+                AudioManager.Instance.PlaySFX("GetMoney");
                 
                 Release();
             }
@@ -283,7 +302,7 @@ public class Monster : MonoBehaviour
         GameManager.Instance.RemoveMonster(this);
     }
 
-    //Despawns the monster when they reach the goal.
+    //When something enters the monsters hitbox.
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Goal")
@@ -291,6 +310,7 @@ public class Monster : MonoBehaviour
             //Scale the monster down once it enters the goal
             StartCoroutine(Scale(new Vector3(1, 1), new Vector3(0.1f, 0.1f), true));
             GameManager.Instance.PlayerLives--;// take away one of the player lives upon a monster reaching the goal.
+            AudioManager.Instance.PlaySFX("PlayerLivesLost");
         }
 
         if(collision.tag == "Tile")

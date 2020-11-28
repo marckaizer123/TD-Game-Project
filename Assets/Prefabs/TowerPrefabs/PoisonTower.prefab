@@ -110,11 +110,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerType: Poison Tower
-  range: 300
+  range: 350
   damage: 5
-  attackCooldown: 1
+  attackCooldown: 1.5
   projectileType: Poison Bullet
-  projectileSpeed: 15
+  projectileSpeed: 12
   debuffType: Poison
   procChance: 100
   debuffDuration: 5

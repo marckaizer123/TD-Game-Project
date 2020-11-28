@@ -1,58 +1,43 @@
 fileFormatVersion: 2
-guid: e596fa44809719f48a91145e58f812c5
+guid: 735cb597a18e0734ca155f520802b104
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5833501640630380623
-    second: Tiyanak 1_0
+      213: 4841162235366619301
+    second: Enemy 16-4_0
   - first:
-      213: 1117507174767326963
-    second: Tiyanak 1_1
+      213: 3994331165353334821
+    second: Enemy 16-4_1
   - first:
-      213: 3654850901802647944
-    second: Tiyanak 1_2
+      213: -5025566779698346352
+    second: Enemy 16-4_2
   - first:
-      213: 6565593723009261223
-    second: Tiyanak 1_3
+      213: 607117176756921270
+    second: Enemy 16-4_3
   - first:
-      213: 568692969797692793
-    second: Tiyanak 1_4
+      213: 5650694471817668809
+    second: Enemy 16-4_4
   - first:
-      213: 4213228097271059253
-    second: Tiyanak 1_5
+      213: -7002434473072658250
+    second: Enemy 16-4_5
   - first:
-      213: -8976224047752223402
-    second: Tiyanak 1_6
+      213: -2572107990338526133
+    second: Enemy 16-4_6
   - first:
-      213: -6211180268373365780
-    second: Tiyanak 1_7
+      213: 9149356069630755925
+    second: Enemy 16-4_7
   - first:
-      213: -1361212763689856165
-    second: Tiyanak 1_8
+      213: 6508218355610224608
+    second: Enemy 16-4_8
   - first:
-      213: -7583284833147980451
-    second: Tiyanak 1_9
+      213: 7995931006406469643
+    second: Enemy 16-4_9
   - first:
-      213: 5610865269555422942
-    second: Tiyanak 1_10
+      213: 2263764303250097664
+    second: Enemy 16-4_10
   - first:
-      213: 8313077285518360793
-    second: Tiyanak 1_11
-  - first:
-      213: 5477490891100496342
-    second: Tiyanak 1_12
-  - first:
-      213: -2443775797719830648
-    second: Tiyanak 1_13
-  - first:
-      213: 841274630325891112
-    second: Tiyanak 1_14
-  - first:
-      213: 6257443463041801364
-    second: Tiyanak 1_15
-  - first:
-      213: -7194487482939324720
-    second: Tiyanak 1_16
+      213: 2324038468245583492
+    second: Enemy 16-4_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -82,7 +67,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -96,7 +81,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 1000
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -162,13 +147,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tiyanak 1_0
+      name: Enemy 16-4_0
       rect:
         serializedVersion: 2
-        x: 46
-        y: 0
-        width: 34
-        height: 42
+        x: 0
+        y: 97
+        width: 31
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f48ae6eb5d2c4f050800000000000000
-      internalID: 5833501640630380623
+      spriteID: 5a8301b47634f2340800000000000000
+      internalID: 4841162235366619301
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiyanak 1_1
+      name: Enemy 16-4_1
       rect:
         serializedVersion: 2
-        x: 83
-        y: 0
-        width: 35
-        height: 42
+        x: 33
+        y: 98
+        width: 30
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f6f4f9cade228f00800000000000000
-      internalID: 1117507174767326963
+      spriteID: 52858223807be6730800000000000000
+      internalID: 3994331165353334821
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiyanak 1_2
+      name: Enemy 16-4_2
       rect:
         serializedVersion: 2
-        x: 119
-        y: 0
-        width: 33
-        height: 42
+        x: 64
+        y: 99
+        width: 31
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88186fce783a8b230800000000000000
-      internalID: 3654850901802647944
+      spriteID: 0968315f3a9914ab0800000000000000
+      internalID: -5025566779698346352
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiyanak 1_3
+      name: Enemy 16-4_3
       rect:
         serializedVersion: 2
-        x: 154
-        y: 0
-        width: 34
-        height: 42
+        x: 0
+        y: 65
+        width: 31
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -239,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ae508f74bcad1b50800000000000000
-      internalID: 6565593723009261223
+      spriteID: 6b362a90bd9ec6800800000000000000
+      internalID: 607117176756921270
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiyanak 1_4
+      name: Enemy 16-4_4
       rect:
         serializedVersion: 2
-        x: 191
-        y: 0
-        width: 26
-        height: 42
+        x: 33
+        y: 66
+        width: 30
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -260,20 +245,104 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97dad033e3764e700800000000000000
-      internalID: 568692969797692793
+      spriteID: 9c8a4f6feac4b6e40800000000000000
+      internalID: 5650694471817668809
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiyanak 1_5
+      name: Enemy 16-4_5
       rect:
         serializedVersion: 2
-        x: 218
+        x: 65
+        y: 67
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b8fd8d72fa52de90800000000000000
+      internalID: -7002434473072658250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy 16-4_6
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 33
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b44adef09690e4cd0800000000000000
+      internalID: -2572107990338526133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy 16-4_7
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 34
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 554c7e5beda09fe70800000000000000
+      internalID: 9149356069630755925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy 16-4_8
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 35
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e703d6cc16d15a50800000000000000
+      internalID: 6508218355610224608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy 16-4_9
+      rect:
+        serializedVersion: 2
+        x: 1
         y: 1
-        width: 26
-        height: 40
+        width: 30
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,20 +350,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 533598fb1a4687a30800000000000000
-      internalID: 4213228097271059253
+      spriteID: b08a365d2e047fe60800000000000000
+      internalID: 7995931006406469643
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiyanak 1_6
+      name: Enemy 16-4_10
       rect:
         serializedVersion: 2
-        x: 247
-        y: 0
-        width: 26
-        height: 42
+        x: 33
+        y: 2
+        width: 30
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -302,20 +371,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 655e86169cb0e6380800000000000000
-      internalID: -8976224047752223402
+      spriteID: 0068e6ec3a18a6f10800000000000000
+      internalID: 2263764303250097664
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiyanak 1_7
+      name: Enemy 16-4_11
       rect:
         serializedVersion: 2
-        x: 276
-        y: 0
-        width: 26
-        height: 40
+        x: 65
+        y: 3
+        width: 30
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -323,197 +392,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ceba0b344747dc9a0800000000000000
-      internalID: -6211180268373365780
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tiyanak 1_8
-      rect:
-        serializedVersion: 2
-        x: 307
-        y: 0
-        width: 26
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b53d98414300c1de0800000000000000
-      internalID: -1361212763689856165
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tiyanak 1_9
-      rect:
-        serializedVersion: 2
-        x: 337
-        y: 1
-        width: 26
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d557b994f92c2c690800000000000000
-      internalID: -7583284833147980451
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tiyanak 1_10
-      rect:
-        serializedVersion: 2
-        x: 368
-        y: 0
-        width: 26
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ed66d6a2c3ccddd40800000000000000
-      internalID: 5610865269555422942
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tiyanak 1_11
-      rect:
-        serializedVersion: 2
-        x: 398
-        y: 1
-        width: 26
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9d0c0b12fbbfd5370800000000000000
-      internalID: 8313077285518360793
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tiyanak 1_12
-      rect:
-        serializedVersion: 2
-        x: 431
-        y: 0
-        width: 33
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6d1ab78c1f4f30c40800000000000000
-      internalID: 5477490891100496342
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tiyanak 1_13
-      rect:
-        serializedVersion: 2
-        x: 467
-        y: 0
-        width: 34
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 88f66321cd6f51ed0800000000000000
-      internalID: -2443775797719830648
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tiyanak 1_14
-      rect:
-        serializedVersion: 2
-        x: 504
-        y: 0
-        width: 34
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8207f1ba1deccab00800000000000000
-      internalID: 841274630325891112
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tiyanak 1_15
-      rect:
-        serializedVersion: 2
-        x: 539
-        y: 0
-        width: 34
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 49c52b02da7e6d650800000000000000
-      internalID: 6257443463041801364
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tiyanak 1_16
-      rect:
-        serializedVersion: 2
-        x: 578
-        y: 0
-        width: 34
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0d6486690cb082c90800000000000000
-      internalID: -7194487482939324720
+      spriteID: 486fe107ca4a04020800000000000000
+      internalID: 2324038468245583492
       vertices: []
       indices: 
       edges: []

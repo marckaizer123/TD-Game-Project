@@ -61,9 +61,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerType: Fire Tower
-  range: 450
+  range: 350
   damage: 5
-  attackCooldown: 1.5
+  attackCooldown: 1
   projectileType: Fire Bullet
   projectileSpeed: 15
   debuffType: Burn

@@ -29,8 +29,8 @@ public class FireTower : Tower
         {
             new TowerUpgrade(Price/2,   //Price
                              2,         //Damage
-                             0,         //Attack cooldown
                              0,         //Range
+                             0,         //Attack cooldown
                              0,         //Duration
                              5,         //ProcChance
                              2,         //TickDamage

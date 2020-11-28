@@ -56,8 +56,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private TextMeshProUGUI playerLivesText;
 
-    private int wave = 0;
-    private int waveSize = 0;
+    private int wave;
+    private int waveSize;
+    private int maxMonsterIndex;
 
 
     [SerializeField]
@@ -124,11 +125,44 @@ public class GameManager : Singleton<GameManager>
 
 
     /// <summary>
-    /// Starts the wave when the Wave Button is pressed.
+    /// Starts the wave when the Wave Button is pressed. Will also update the paramaters of the wave it will spawn.
     /// </summary>
     public void StartWave()
     {
         wave++;
+
+        
+        waveSize++;
+
+        if (wave % 4 == 0)
+        {
+            waveSize += 1;
+        }
+
+        if (wave % 5 == 0)
+        {
+            waveSize += 1;
+
+        }
+
+        if (wave == 3)
+        {
+            maxMonsterIndex++;
+        }
+
+        if (wave == 6)
+        {
+            maxMonsterIndex++;
+        }
+
+        if (wave == 9)
+        {
+            maxMonsterIndex++;
+        }
+
+
+
+
         waveText.text = string.Format("Wave: {0}", wave); 
         StartCoroutine(SpawnWave());
         //Hide Wave Button when wave is ongoing
@@ -141,16 +175,8 @@ public class GameManager : Singleton<GameManager>
     /// <returns></returns>
     private IEnumerator SpawnWave()
     {
-
-        waveSize++;
-
-        if (wave % 5 == 0)
-        {
-            waveSize += 2;
-        }
-
-
         int monsterIndex;
+
 
         string type = string.Empty;
         LevelManager.Instance.GeneratePath();
@@ -159,7 +185,7 @@ public class GameManager : Singleton<GameManager>
         ///Spawns an amount of monsters equal to waveSize.
         for (int i = 0; i < waveSize; i++)
         {
-            monsterIndex = Random.Range(0, 3);
+            monsterIndex = Random.Range(0, maxMonsterIndex);
 
             switch (monsterIndex)
             {
@@ -168,26 +194,26 @@ public class GameManager : Singleton<GameManager>
                     break;
 
                 case 1:
-                    type = "TiyanakPrefab";
+                    type = "GhostPrefab";
                     break;
 
                 case 2:
-                    type = "TiyanakPrefab";
+                    type = "SlimePrefab";
                     break;
 
                 case 3:
-                    type = "TiyanakPrefab";
+                    type = "SkeletonPrefab";
                     break;
-
             }
 
             Monster monster = Pool.GetObject(type).GetComponent<Monster>();
             monster.Spawn();
 
+            //add the monster to the list of active monsters
             activeMonsters.Add(monster);
 
             //delay between spawning of monsters.
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1.0f);
         }
 
         
@@ -376,6 +402,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (!gameOver)
         {
+            AudioManager.Instance.PlaySFX("GameOver");
             gameOver = true;
             gameOverMenu.SetActive(true);
         }
@@ -441,6 +468,10 @@ public class GameManager : Singleton<GameManager>
     private void Awake()
     {
         Pool = GetComponent<ObjectPool>();
+
+        waveSize = 0;
+        wave = 0;
+        maxMonsterIndex = 1;
     }
 
     // Start is called before the first frame update

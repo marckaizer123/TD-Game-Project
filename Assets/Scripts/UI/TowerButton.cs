@@ -51,6 +51,7 @@ public class TowerButton : MonoBehaviour
         if (price <= GameManager.Instance.Currency)
         {
             GetComponent<Image>().color = Color.white;
+            priceText.color = new Color(233, 243, 0);
 
         }
         else

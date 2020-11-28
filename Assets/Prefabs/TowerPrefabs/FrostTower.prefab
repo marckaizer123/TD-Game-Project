@@ -61,11 +61,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerType: Frost Tower
-  range: 300
-  damage: 2.5
-  attackCooldown: 2
+  range: 350
+  damage: 3
+  attackCooldown: 1.3
   projectileType: Frost Bullet
-  projectileSpeed: 10
+  projectileSpeed: 15
   debuffType: Slow
   procChance: 100
   debuffDuration: 4
