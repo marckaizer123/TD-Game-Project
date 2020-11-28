@@ -23,6 +23,7 @@ public class TowerUpgrade
 
     public TowerUpgrade(int price, float damage,  float range, float attackCooldown, float debuffDuration, float procChance, float tickDamage, float slowfactor)
     {
+        this.TickDamage = tickDamage;
         this.Damage = damage;
         this.Range = range;
         this.AttackCooldown = attackCooldown;

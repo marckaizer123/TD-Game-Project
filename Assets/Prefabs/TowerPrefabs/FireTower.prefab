@@ -68,8 +68,8 @@ MonoBehaviour:
   projectileSpeed: 15
   debuffType: Burn
   procChance: 100
-  debuffDuration: 2
-  tickTime: 2
+  debuffDuration: 1.5
+  tickTime: 1.5
   tickDamage: 5
 --- !u!1 &9190758407103770385
 GameObject:

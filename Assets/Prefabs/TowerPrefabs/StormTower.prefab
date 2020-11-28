@@ -30,7 +30,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerType: Storm Tower
   range: 550
-  damage: 15
+  damage: 12
   attackCooldown: 3
   projectileType: Storm Bullet
   projectileSpeed: 50

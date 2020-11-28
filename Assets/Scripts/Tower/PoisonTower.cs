@@ -32,8 +32,8 @@ public class PoisonTower : Tower
                              25,         //Range
                              0,         //Attack cooldown
                              1,         //Duration
-                             5,         //ProcChance
-                             2,         //TickDamage
+                             0,         //ProcChance
+                             0.25f,         //TickDamage
                              0),        //SlowFactor
 
             new TowerUpgrade(Price/2,   //Price
@@ -41,8 +41,8 @@ public class PoisonTower : Tower
                              25,         //Range
                              0,         //Attack cooldown
                              1,         //Duration
-                             5,         //ProcChance
-                             2,         //TickDamage
+                             0,         //ProcChance
+                             0.25f,         //TickDamage
                              0),        //SlowFactor
 
             new TowerUpgrade(Price/2,   //Price
@@ -50,8 +50,8 @@ public class PoisonTower : Tower
                              25,         //Range
                              0,         //Attack cooldown
                              1,         //Duration
-                             5,         //ProcChance
-                             2,         //TickDamage
+                             0,         //ProcChance
+                             0.25f,         //TickDamage
                              0),        //SlowFactor
 
             new TowerUpgrade(Price,   //Price
@@ -59,8 +59,8 @@ public class PoisonTower : Tower
                              25,         //Range
                              0,         //Attack cooldown
                              2,         //Duration
-                             5,         //ProcChance
-                             3,         //TickDamage
+                             0,         //ProcChance
+                             0.25f,         //TickDamage
                              0),        //SlowFactor
         };
     }
@@ -77,13 +77,13 @@ public class PoisonTower : Tower
                              "Damage Per Second: {1}" +
                              "</color>",
                              base.SetTooltip(),
-                             tickDamage/tickTime);
+                             this.tickDamage/this.tickTime);
 
     }
 
     public override void Upgrade()
     {
-        this.TickDamage -= NextUpgrade.TickDamage;
+        this.TickDamage += NextUpgrade.TickDamage;
         base.Upgrade();
     }
 
