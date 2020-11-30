@@ -49,8 +49,8 @@ public class TileScript : MonoBehaviour
 
         IsEmpty = true; // sets the tile to be empty.
         this.GridPosition = gridPos;
-        transform.position = worldPos;
-        transform.SetParent(parent);
+        this.transform.position = worldPos;
+        this.transform.SetParent(parent);
         LevelManager.Instance.Tiles.Add(gridPos, this);
     }
 
@@ -81,6 +81,11 @@ public class TileScript : MonoBehaviour
     /// </summary>
     private void OnMouseOver()
     {
+        
+
+
+
+
         if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedButton != null)
         {
             if (AllowsTower) // checks if the tile allows you to place the tower
@@ -89,7 +94,7 @@ public class TileScript : MonoBehaviour
                 {
                     ColorTile(emptyColor); //Changes the color of the tile to indicate that it is empty.
 
-                    if (Input.GetMouseButtonDown(0)) //Allows placement of tower.
+                    if (Input.GetMouseButtonUp(0)) //Allows placement of tower.
                     {
                         PlaceTower();
                     }

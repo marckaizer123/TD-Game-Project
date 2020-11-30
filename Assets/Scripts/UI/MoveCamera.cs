@@ -6,7 +6,10 @@ using UnityEngine;
 public class MoveCamera : MonoBehaviour
 {
     [SerializeField]
-    private float cameraSpeed =5;
+    private float cameraSpeed;
+
+    [SerializeField]
+    private float mobileCameraSpeed;
 
     private float xMax;
     private float yMin;
@@ -47,6 +50,17 @@ public class MoveCamera : MonoBehaviour
             transform.Translate(Vector3.right * cameraSpeed * Time.deltaTime);
 
         }
+
+
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && GameManager.Instance.ClickedButton==null)
+        {
+            Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
+            transform.Translate(-touchDeltaPosition.x * cameraSpeed * Time.deltaTime, -touchDeltaPosition.y * cameraSpeed * Time.deltaTime, 0);
+        }
+
+
+
+
         // prevents the camera from moving beyond the set boundaries.
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, 0, xMax), Mathf.Clamp(transform.position.y, yMin, 0), -10); 
     }

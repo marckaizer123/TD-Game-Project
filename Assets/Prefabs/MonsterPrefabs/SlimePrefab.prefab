@@ -52,7 +52,7 @@ MonoBehaviour:
     bar: {fileID: 8720106159802257230}
     maxVal: 50
     currentVal: 50
-  currentSpeed: 5
+  currentSpeed: 3
   goldReward: 40
 --- !u!61 &5845472481108298487
 BoxCollider2D:

@@ -98,6 +98,17 @@ public class LevelManager : Singleton<LevelManager>
 
         }
 
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = 0; y <= 2; y++)
+            {
+                Point point = new Point(goalSpawn.X - x, goalSpawn.Y - y);
+
+                Tiles[point].AllowsTower = false;
+            }
+
+        }
+
 
         GameObject tmp = (GameObject)Instantiate(startPrefab, Tiles[startSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
 
@@ -155,7 +166,7 @@ public class LevelManager : Singleton<LevelManager>
 
         maxTile = Tiles[new Point(mapX - 1, mapY - 1)].transform.position;
 
-        moveCamera.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y - TileSize));
+        moveCamera.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y - TileSize, -10));
 
         SpawnPortal();
     }

@@ -125,7 +125,7 @@ public class GameManager : Singleton<GameManager>
 
 
     /// <summary>
-    /// Starts the wave when the Wave Button is pressed. Will also update the paramaters of the wave it will spawn.
+    /// Starts the wave when the Wave Button is pressed. Will also update the parameters of the wave it will spawn.
     /// </summary>
     public void StartWave()
     {
@@ -134,12 +134,12 @@ public class GameManager : Singleton<GameManager>
         
         waveSize++;
 
-        if (wave % 4 == 0)
+        if (wave % 5 == 0)
         {
             waveSize += 1;
         }
 
-        if (wave % 5 == 0)
+        if (wave % 10 == 0)
         {
             waveSize += 1;
 
@@ -435,13 +435,18 @@ public class GameManager : Singleton<GameManager>
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(true);
     }
+
     public void Resume()
     {
 
         ShowInGameMenu();
     }
 
-    
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void Restart()
     {
 
@@ -477,7 +482,7 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        PlayerLives = 10;
+        PlayerLives = 20;
         Currency = 500;
     }
 
