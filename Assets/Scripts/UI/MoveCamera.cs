@@ -55,7 +55,7 @@ public class MoveCamera : MonoBehaviour
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && GameManager.Instance.ClickedButton==null)
         {
             Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
-            transform.Translate(-touchDeltaPosition.x * cameraSpeed * Time.deltaTime, -touchDeltaPosition.y * cameraSpeed * Time.deltaTime, 0);
+            transform.Translate(-touchDeltaPosition.x * mobileCameraSpeed * Time.deltaTime, -touchDeltaPosition.y * mobileCameraSpeed * Time.deltaTime, 0);
         }
 
 

@@ -8,7 +8,7 @@ using UnityEngine;
 /// <summary>
 /// This will be inherited by the more specialized tower types.
 /// </summary>
-public abstract class Tower: MonoBehaviour
+public abstract class Tower : MonoBehaviour
 {
     [SerializeField]
     private string towerType;
@@ -159,10 +159,10 @@ public abstract class Tower: MonoBehaviour
         {
             this.debuffDuration = value;
         }
-    }  
+    }
 
     //Reference to the array containing all the upgrades of a tower.
-    public TowerUpgrade[] Upgrades { get; protected set;}
+    public TowerUpgrade[] Upgrades { get; protected set; }
 
 
     //Reference to the next upgrade on the array.
@@ -172,7 +172,7 @@ public abstract class Tower: MonoBehaviour
         {
             if (Upgrades.Length >= towerLevel)
             {
-                return Upgrades[towerLevel-1];
+                return Upgrades[towerLevel - 1];
             }
 
             return null;
@@ -259,10 +259,13 @@ public abstract class Tower: MonoBehaviour
         this.procChance += NextUpgrade.ProcChance;
         this.range += NextUpgrade.Range;
         this.AttackCooldown -= NextUpgrade.AttackCooldown;
-        this.debuffDuration +=  NextUpgrade.DebuffDuration;
+        this.debuffDuration += NextUpgrade.DebuffDuration;
         TowerLevel++;
+
+        towerRange = new Vector3(range, range, 0);
+        transform.localScale = towerRange;
     }
-    
+
 
     /// <summary>
     /// Script that runs upon an enemy entering the range of the tower.
@@ -291,7 +294,7 @@ public abstract class Tower: MonoBehaviour
             //sets the tower's target to null once their target leaves their range.
             target = null;
 
-            
+
         }
     }
 
@@ -300,38 +303,6 @@ public abstract class Tower: MonoBehaviour
     /// </summary>
     private void Attack()
     {
-        
-
-
-        //Check if tower does not have a target and there is a monster in range
-        if (target == null && monsterTargets.Count > 0 && monsterTargets.Peek().AllowMovement)
-        {
-            //removes the first monster in the queue and sets them as the target.
-            target = monsterTargets.Dequeue();
-        }
-
-
-        //if the tower has a target and the target is active and enabled
-        if (target != null && target.isActiveAndEnabled)
-        {
-            if (target.Health.CurrentVal > 0) // check if the target is alive.
-            {
-                if (canAttack)
-                {
-                    // calls the shoot function if the tower can attack
-                    Shoot();
-
-                    //prevents the tower from attacking immediately after shooting.
-                    canAttack = false;
-                }
-            }
-
-            else
-            {
-                target = null;
-            }
-        }
-
         if (!canAttack)
         {
             //attack timer increases whenever the tower cannot attack.
@@ -346,6 +317,36 @@ public abstract class Tower: MonoBehaviour
                 attackTimer = 0;
             }
         }
+
+        //Check if tower does not have a target and there is a monster in range
+        if (target == null && monsterTargets.Count > 0 && monsterTargets.Peek().AllowMovement)
+        {
+            //removes the first monster in the queue and sets them as the target.
+            target = monsterTargets.Dequeue();
+        }
+
+        //if the tower has a target and the target is active and enabled and target is alive
+
+
+        if (target != null && (target.isActiveAndEnabled == false || target.Health.CurrentVal <= 0))
+        {
+            target = null;
+        }
+
+        if (target != null && target.isActiveAndEnabled == true && target.Health.CurrentVal > 0)
+        {
+
+            if (canAttack)
+            {
+                // calls the shoot function if the tower can attack
+                Shoot();
+
+                //prevents the tower from attacking immediately after shooting.
+                canAttack = false;
+            }
+        }
+
+
 
 
     }

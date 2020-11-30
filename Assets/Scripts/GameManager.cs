@@ -59,6 +59,7 @@ public class GameManager : Singleton<GameManager>
     private int wave;
     private int waveSize;
     private int maxMonsterIndex;
+    private int bonusHealth;
 
 
     [SerializeField]
@@ -142,6 +143,7 @@ public class GameManager : Singleton<GameManager>
         if (wave % 10 == 0)
         {
             waveSize += 1;
+           
 
         }
 
@@ -158,6 +160,15 @@ public class GameManager : Singleton<GameManager>
         if (wave == 9)
         {
             maxMonsterIndex++;
+        }
+
+        if (wave % 10 == 0)
+        {
+            bonusHealth = 5;
+        }
+        else
+        {
+            bonusHealth = 0;
         }
 
 
@@ -207,7 +218,7 @@ public class GameManager : Singleton<GameManager>
             }
 
             Monster monster = Pool.GetObject(type).GetComponent<Monster>();
-            monster.Spawn();
+            monster.Spawn(bonusHealth);
 
             //add the monster to the list of active monsters
             activeMonsters.Add(monster);

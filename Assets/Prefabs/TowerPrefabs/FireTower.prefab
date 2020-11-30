@@ -65,7 +65,7 @@ MonoBehaviour:
   damage: 5
   attackCooldown: 1
   projectileType: Fire Bullet
-  projectileSpeed: 10
+  projectileSpeed: 12
   debuffType: Burn
   procChance: 50
   debuffDuration: 1

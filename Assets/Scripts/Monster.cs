@@ -142,22 +142,7 @@ public class Monster : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Rotates the monster based on the direction it will move into.
-    /// </summary>
-    /*private void RotateMonster()
-    {
-        //Calculates the direction of the monsters next destination relative to its current position
-        Vector3 faceDirection = destination - transform.position;
 
-        //Calculates the angle of rotation needed for the monster to face the correct direction.
-        float rotationAngle = Mathf.Atan2(faceDirection.y, faceDirection.x) * 180 / Mathf.PI +90;
-
-
-        //rotates only the monster sprite of the monster game object.
-        transform.GetChild(0).transform.rotation = Quaternion.AngleAxis(rotationAngle, Vector3.forward);
-
-    }*/
 
     /// <summary>
     /// Sets the path that the monster will follow.
@@ -179,21 +164,23 @@ public class Monster : MonoBehaviour
     /// <summary>
     /// Spawns the monsters. Uses scale to make the monster start from a smaller size then scale into a bigger size to give the effect of coming through a portal.
     /// </summary>
-    public void Spawn()
+    public void Spawn(int health)
     {
+
+
 
         transform.position = LevelManager.Instance.StartPortal.transform.position; // sets the position where the monster will spawn.
 
-        monsterAnimator = transform.GetChild(0).GetComponent<Animator>();
+        monsterAnimator = transform.GetChild(0).GetComponent<Animator>(); //sets the animator component of the monster.
 
-        this.health.CurrentVal = this.health.MaxVal;
+        this.health.MaxVal += health;
+        this.health.CurrentVal = this.health.MaxVal; //Sets the current health of the monster to the max value.
 
-        AudioManager.Instance.PlaySFX("Spawn");
+        AudioManager.Instance.PlaySFX("Spawn"); // plays the spawn sound effect.
 
         StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(1, 1), false));// starts the scaling function alongside the spawn function.
 
         
-
         SetPath(LevelManager.Instance.Path); // sets the path that the monster will follow.
     }
 
@@ -202,6 +189,7 @@ public class Monster : MonoBehaviour
     /// </summary>
     /// <param name="from">Initial Size</param>
     /// <param name="to">Target Size</param>
+    /// <param name="remove">Check if the monster is spawning or despawning </param>
     /// <returns></returns>
     public IEnumerator Scale(Vector3 from, Vector3 to, bool remove)
     {
@@ -232,7 +220,7 @@ public class Monster : MonoBehaviour
         
         if(!debuffs.Exists(x => x.GetType() == debuff.GetType()) && !newDebuffs.Exists(x => x.GetType() == debuff.GetType())) // prevents same type of debuffs stacking
         {
-            //Debuffs are first added to newDebuffs
+            //Debuffs are first added to the list newDebuffs
             newDebuffs.Add(debuff);
         }
 
@@ -253,7 +241,7 @@ public class Monster : MonoBehaviour
             expiredDebuffs.Clear();
         }
 
-        //Checks if there are new debuffs placed on the monster
+        //Checks if there are new debuffs to be placed on the monster
         if (newDebuffs.Count > 0)
         {
             debuffs.AddRange(newDebuffs);
@@ -299,7 +287,7 @@ public class Monster : MonoBehaviour
         allowMovement = false;
         currentSpeed = MaxSpeed;
         GameManager.Instance.Pool.ReleaseObject(gameObject);
-        GameManager.Instance.RemoveMonster(this);
+        GameManager.Instance.RemoveMonster(this); //removes the monster from the list of active monsters.
     }
 
     //When something enters the monsters hitbox.
