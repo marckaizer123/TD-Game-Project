@@ -138,14 +138,14 @@ public class GameManager : Singleton<GameManager>
         
         waveSize++;
 
-        if (wave % 5 == 0)
+        if (wave % 3 == 0)
         {
             waveSize += 1;
         }
 
-        if (wave % 10 == 0)
+        if (wave % 5 == 0)
         {
-            waveSize += 1;
+            waveSize += 2;
            
 
         }
@@ -165,7 +165,18 @@ public class GameManager : Singleton<GameManager>
             maxMonsterIndex++;
         }
 
-        if (wave % 5 == 0)
+
+        if(wave % 20 == 0)
+        {
+            bonusHealth = 15;
+        }
+
+        else if(wave % 10 == 0)
+        {
+            bonusHealth = 10;
+        }
+
+        else if (wave % 5 == 0)
         {
             bonusHealth = 5;
         }
