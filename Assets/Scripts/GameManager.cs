@@ -162,7 +162,7 @@ public class GameManager : Singleton<GameManager>
             maxMonsterIndex++;
         }
 
-        if (wave % 10 == 0)
+        if (wave % 5 == 0)
         {
             bonusHealth = 5;
         }
@@ -324,7 +324,12 @@ public class GameManager : Singleton<GameManager>
             upgradeText.text = "Upgrade: " + selectedTower.NextUpgrade.Price;
         }
 
-        
+        else
+        {
+            upgradeText.text = "Max Upgrade Reached";
+        }
+
+
         CheckUpgrade();
 
 
@@ -376,6 +381,17 @@ public class GameManager : Singleton<GameManager>
             {
 
                 selectedTower.Upgrade();
+
+                if (selectedTower.NextUpgrade != null)
+                {
+                    upgradeText.text = "Upgrade: " + selectedTower.NextUpgrade.Price;
+                }
+
+                else
+                {
+                    upgradeText.text = "Max Upgrade Reached";
+                }
+
                 CheckUpgrade();
 
                 SetToolTipText(selectedTower.SetTooltip());

@@ -112,7 +112,7 @@ MonoBehaviour:
   towerType: Poison Tower
   range: 350
   damage: 5
-  attackCooldown: 1.5
+  attackCooldown: 1.2
   projectileType: Poison Bullet
   projectileSpeed: 12
   debuffType: Poison

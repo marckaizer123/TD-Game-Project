@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -289,12 +290,19 @@ public abstract class Tower : MonoBehaviour
     /// <param name="collision"></param>
     public void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Monster")
+        //if the towers current target leaves its range
+        if (collision.tag == "Monster" && collision.GetComponent<Monster>() == target)
         {
             //sets the tower's target to null once their target leaves their range.
             target = null;
 
 
+        }
+
+        //if a monsters leaves a towers range and it wasn't its target. Remove it from the queue
+        if(collision.tag == "Monster" && collision.GetComponent<Monster>() != target)
+        {
+            monsterTargets = new Queue<Monster>(monsterTargets.Where(x => x != collision.GetComponent<Monster>()));
         }
     }
 

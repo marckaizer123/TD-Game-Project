@@ -327,8 +327,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health:
     bar: {fileID: 964644732974545403}
-    maxVal: 20
-    currentVal: 20
+    maxVal: 25
+    currentVal: 25
   currentSpeed: 6
   goldReward: 15
 --- !u!61 &-6523363593359213502

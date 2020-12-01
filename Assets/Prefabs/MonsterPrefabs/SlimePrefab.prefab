@@ -50,9 +50,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health:
     bar: {fileID: 8720106159802257230}
-    maxVal: 50
-    currentVal: 50
-  currentSpeed: 3
+    maxVal: 60
+    currentVal: 60
+  currentSpeed: 4
   goldReward: 40
 --- !u!61 &5845472481108298487
 BoxCollider2D:

@@ -233,8 +233,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health:
     bar: {fileID: 7529177789027573142}
-    maxVal: 15
-    currentVal: 15
+    maxVal: 20
+    currentVal: 20
   currentSpeed: 12
   goldReward: 25
 --- !u!61 &4640470507458811951
