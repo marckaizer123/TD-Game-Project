@@ -38,8 +38,21 @@ public abstract class Tower : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private int price;
 
-    public int Price { get; set; }
+    public int Price
+    {
+        get
+        {
+            return price;
+        }
+
+        private set
+        {
+            price = value; 
+        }
+    }
 
     [SerializeField]
     private float range;
@@ -369,8 +382,8 @@ public abstract class Tower : MonoBehaviour
         // gets a projectile from the pool.
         Projectile projectile = (Projectile)GameManager.Instance.Pool.GetObject(projectileType).GetComponent<Projectile>();
 
-        // sets the initial position of the projectile on the position of the tower.
-        projectile.transform.position = transform.position;
+        // sets the initial position of the projectile on top of the tower.
+        projectile.transform.position = new Vector3(transform.position.x, transform.position.y+2);
 
         //pass the tower to the initialize function in the projectile class.
         projectile.Initialize(this);

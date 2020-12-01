@@ -53,7 +53,7 @@ MonoBehaviour:
     maxVal: 60
     currentVal: 60
   currentSpeed: 4
-  goldReward: 40
+  goldReward: 30
 --- !u!61 &5845472481108298487
 BoxCollider2D:
   m_ObjectHideFlags: 0

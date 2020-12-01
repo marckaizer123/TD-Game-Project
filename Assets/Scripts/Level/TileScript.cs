@@ -70,7 +70,6 @@ public class TileScript : MonoBehaviour
 
         IsEmpty = false;
 
-        myTower.Price = GameManager.Instance.ClickedButton.Price;
 
         GameManager.Instance.BuyTower();
 

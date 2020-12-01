@@ -264,7 +264,7 @@ public class GameManager : Singleton<GameManager>
     public void PickTower(TowerButton towerButton)
     {
 
-        if (Currency>= towerButton.Price && !waveIsActive && !gameOver)
+        if (Currency>= towerButton.Tower.Price && !waveIsActive && !gameOver)
         {
             this.ClickedButton = towerButton;
             Hover.Instance.Activate(towerButton.TowerPrefab);
@@ -293,9 +293,9 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     public void BuyTower()
     {
-        if (Currency>= ClickedButton.Price)
+        if (Currency>= ClickedButton.Tower.Price)
         {
-            Currency -= ClickedButton.Price;
+            Currency -= ClickedButton.Tower.Price;
             Hover.Instance.Deactivate();
             cancelField.SetActive(false);
             ShowStats();
@@ -359,7 +359,12 @@ public class GameManager : Singleton<GameManager>
         }
 
 
-        CheckUpgrade();
+        if (waveIsActive)
+        {
+            
+        }
+
+        CheckGamePanel();
 
 
     }
@@ -406,7 +411,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (selectedTower!= null)
         {
-            if (selectedTower.NextUpgrade!=null && Currency >= selectedTower.NextUpgrade.Price)
+            if (selectedTower.NextUpgrade!=null && Currency >= selectedTower.NextUpgrade.Price && !waveIsActive)
             {
 
                 selectedTower.Upgrade();
@@ -421,7 +426,7 @@ public class GameManager : Singleton<GameManager>
                     upgradeText.text = "Max Upgrade Reached";
                 }
 
-                CheckUpgrade();
+                CheckGamePanel();
 
                 SetToolTipText(selectedTower.SetTooltip());
 
@@ -431,24 +436,37 @@ public class GameManager : Singleton<GameManager>
     }
 
     /// <summary>
-    /// Greys out the upgrade button if player can't afford it.
+    /// Greys out the upgrade button or sell button depending on certain conditions..
     /// </summary>
-    public void CheckUpgrade()
+    public void CheckGamePanel()
     {
-        if (selectedTower.NextUpgrade == null)
+        if (waveIsActive) // if the wave is ongoing, selling and upgrading is disabled.
         {
+            gamePanel.transform.GetChild(0).GetComponent<Image>().color = Color.grey;
             gamePanel.transform.GetChild(1).GetComponent<Image>().color = Color.grey;
-        }
-
-        else if (currency >= selectedTower.NextUpgrade.Price)
-        {
-            gamePanel.transform.GetChild(1).GetComponent<Image>().color = Color.white;
         }
 
         else
         {
-            gamePanel.transform.GetChild(1).GetComponent<Image>().color = Color.grey;
+            gamePanel.transform.GetChild(0).GetComponent<Image>().color = Color.white;
+
+            if (selectedTower.NextUpgrade == null) //if the tower does not have any more upgrades left, then grey it out.
+            {
+                gamePanel.transform.GetChild(1).GetComponent<Image>().color = Color.grey;
+            }
+
+            else if (currency >= selectedTower.NextUpgrade.Price) // if there is an upgrade available and the player can allow it, then set it to original color.
+            {
+                gamePanel.transform.GetChild(1).GetComponent<Image>().color = Color.white;
+            }
+
+            else // if the player can't afford the upgrade it then grey it out.
+            {
+                gamePanel.transform.GetChild(1).GetComponent<Image>().color = Color.grey;
+            }
         }
+
+        
     }
 
     /// <summary>
@@ -539,7 +557,7 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         PlayerLives = 20;
-        Currency = 500;
+        Currency = 400;
     }
 
     // Update is called once per frame

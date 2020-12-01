@@ -62,15 +62,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerType: Fire Tower
   towerLevel: 1
+  price: 50
   range: 350
   damage: 5
   attackCooldown: 1
   projectileType: Fire Bullet
   projectileSpeed: 12
   debuffType: Burn
-  procChance: 50
-  debuffDuration: 1
-  tickTime: 1
+  procChance: 20
+  debuffDuration: 1.5
+  tickTime: 1.5
   tickDamage: 5
 --- !u!1 &9190758407103770385
 GameObject:

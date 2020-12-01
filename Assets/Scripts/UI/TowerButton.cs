@@ -13,21 +13,34 @@ public class TowerButton : MonoBehaviour
         get { return towerPrefab; }
     }
 
-    [SerializeField]
-    private int price;
+    private Tower tower;
 
-    public int Price
+    public Tower Tower
     {
-        get { return price; }
+        get
+        {
+            return tower;
+        }
+
+        private set
+        {
+            tower = value;
+        }
     }
+
 
     [SerializeField]
     private TextMeshProUGUI priceText;
 
 
+    private void Awake()
+    {
+        tower = towerPrefab.GetComponentInChildren<Tower>();
+    }
+
     private void Start()
     {
-        priceText.text = Price.ToString();
+        priceText.text = tower.Price.ToString();
 
         GameManager.Instance.CurrencyChange += new CurrencyChanged(PriceCheck);
     }
@@ -37,7 +50,7 @@ public class TowerButton : MonoBehaviour
     /// </summary>
     private void PriceCheck()
     {
-        if (price <= GameManager.Instance.Currency)
+        if (tower.Price <= GameManager.Instance.Currency)
         {
             GetComponent<Image>().color = Color.white;
             priceText.color = new Color(233, 243, 0);
@@ -55,7 +68,7 @@ public class TowerButton : MonoBehaviour
     /// </summary>
     public void ShowInfo ()
     {
-        towerPrefab.GetComponentInChildren<Tower>().GetStats();
+        Tower.GetStats();
    
     }
 

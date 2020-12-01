@@ -30,6 +30,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerType: Storm Tower
   towerLevel: 1
+  price: 150
   range: 600
   damage: 20
   attackCooldown: 3
