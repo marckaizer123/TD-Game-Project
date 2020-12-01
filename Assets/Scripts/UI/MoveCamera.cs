@@ -11,17 +11,27 @@ public class MoveCamera : MonoBehaviour
     [SerializeField]
     private float mobileCameraSpeed;
 
+    private float xMin;
     private float xMax;
     private float yMin;
+    private float yMax;
+
+
+    public void SetMinLimits(Vector3 minTile)
+    {
+        Vector3 wp = Camera.main.ViewportToWorldPoint(new Vector3(1, 0));
+        xMin = wp.x + minTile.x;
+        yMax = minTile.y + wp.y;
+    }
+
 
     /// <summary>
     /// sets the boundaries that the camera can move in.
     /// </summary>
     /// <param name="maxTile"></param>
-    public void SetLimits(Vector3 maxTile)
+    public void SetMaxLimits(Vector3 maxTile)
     {
-        Vector3 wp = Camera.main.ViewportToWorldPoint(new Vector3(1, 0));
-
+        Vector3 wp = Camera.main.ViewportToWorldPoint(new Vector3(1, 0)); 
         xMax = maxTile.x - wp.x;
         yMin = maxTile.y - wp.y;
     }
@@ -62,7 +72,7 @@ public class MoveCamera : MonoBehaviour
 
 
         // prevents the camera from moving beyond the set boundaries.
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, 0, xMax), Mathf.Clamp(transform.position.y, yMin, 0), -10); 
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, xMin, xMax), Mathf.Clamp(transform.position.y, yMin, yMax), -10); 
     }
 
     // Start is called before the first frame update

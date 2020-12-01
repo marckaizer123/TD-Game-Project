@@ -81,11 +81,6 @@ public class TileScript : MonoBehaviour
     /// </summary>
     private void OnMouseOver()
     {
-        
-
-
-
-
         if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedButton != null)
         {
             if (AllowsTower) // checks if the tile allows you to place the tower
@@ -104,7 +99,30 @@ public class TileScript : MonoBehaviour
                 {
                     ColorTile(fullColor); //changes the color of the tile to indicate that it is occupied.
 
+                    if (Input.GetMouseButtonUp(0)) // cancels the placement of tower if drag is released on a tile already has a tower.
+                    {
+                        GameManager.Instance.CancelTowerPick();
+                    }
+
                 }
+            }
+
+            //cancels the placement of tower if drag is released on a tile that does not allow towers.
+            else 
+            {
+                if (Input.GetMouseButtonUp(0))
+                {
+                    GameManager.Instance.CancelTowerPick();
+                }
+                    
+            }
+        }
+
+        else if(EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedButton != null)
+        {
+            if (Input.GetMouseButtonUp(0)) // cancels the placement of tower if drag is released on a tile already has a tower.
+            {
+                GameManager.Instance.CancelTowerPick();
             }
         }
 
@@ -119,6 +137,8 @@ public class TileScript : MonoBehaviour
                 GameManager.Instance.DeselectTower();
             }
         }
+
+
         
     }
 

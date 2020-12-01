@@ -29,6 +29,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerType: Storm Tower
+  towerLevel: 1
   range: 600
   damage: 20
   attackCooldown: 3

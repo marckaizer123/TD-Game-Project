@@ -22,6 +22,7 @@ public abstract class Tower : MonoBehaviour
         }
     }
 
+    [SerializeField]
     private int towerLevel;
 
     public int TowerLevel
@@ -198,7 +199,7 @@ public abstract class Tower : MonoBehaviour
 
     private void Awake()
     {
-        TowerLevel = 1;
+        towerLevel = 1;
         rangeRenderer = GetComponent<SpriteRenderer>();
         towerRange = new Vector3(range, range, 0);
         transform.localScale = towerRange;

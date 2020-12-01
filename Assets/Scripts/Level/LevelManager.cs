@@ -144,7 +144,8 @@ public class LevelManager : Singleton<LevelManager>
         int mapX = mapData[0].ToCharArray().Length;
         int mapY = mapData.Length;
 
-        Vector3 maxTile = Vector3.zero;
+        Vector3 minTile;
+        Vector3 maxTile;
 
         //Calculates the world's start point.
         Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
@@ -164,9 +165,15 @@ public class LevelManager : Singleton<LevelManager>
             }
         }
 
+
+        minTile = Tiles[new Point(0, 0)].transform.position;
         maxTile = Tiles[new Point(mapX - 1, mapY - 1)].transform.position;
 
-        moveCamera.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y - TileSize, -10));
+
+
+        moveCamera.SetMinLimits(new Vector3(minTile.x - TileSize, minTile.y + TileSize));
+
+        moveCamera.SetMaxLimits(new Vector3(maxTile.x + 2*TileSize, maxTile.y - 2*TileSize, -10));
 
         SpawnPortal();
     }

@@ -30,7 +30,7 @@ public class FrostTower : Tower
                              0,         //Attack cooldown
                              0.5f,         //Duration
                              0,         //ProcChance
-                             3,         //TickDamage
+                             0,         //TickDamage
                              10),        //SlowFactor
 
             new TowerUpgrade(Price,   //Price
@@ -39,7 +39,7 @@ public class FrostTower : Tower
                              0,         //Attack cooldown
                              0.5f,         //Duration
                              0,         //ProcChance
-                             3,         //TickDamage
+                             0,         //TickDamage
                              10),        //SlowFactor
 
             new TowerUpgrade(Price,     //Price
@@ -48,7 +48,7 @@ public class FrostTower : Tower
                              0,         //Attack cooldown
                              0.5f,         //Duration
                              0,         //ProcChance
-                             3,         //TickDamage
+                             0,         //TickDamage
                              10),        //SlowFactor
 
             new TowerUpgrade(Price*2,   //Price
@@ -57,7 +57,7 @@ public class FrostTower : Tower
                              0,         //Attack cooldown
                              0.5f,         //Duration
                              0,         //ProcChance
-                             3,         //TickDamage
+                             0,         //TickDamage
                              10),        //SlowFactor
         };
     }

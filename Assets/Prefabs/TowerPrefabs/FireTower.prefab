@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerType: Fire Tower
+  towerLevel: 1
   range: 350
   damage: 5
   attackCooldown: 1

@@ -68,6 +68,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject waveButton;
 
+    [SerializeField]
+    private GameObject cancelField;
+
 
     private List<Monster> activeMonsters = new List<Monster>();
 
@@ -254,8 +257,21 @@ public class GameManager : Singleton<GameManager>
         {
             this.ClickedButton = towerButton;
             Hover.Instance.Activate(towerButton.TowerPrefab);
+            cancelField.SetActive(true);
         }
         
+    }
+
+    /// <summary>
+    /// Function that allows the players to cancel their picked tower.
+    /// </summary>
+    public void CancelTowerPick()
+    {
+        ClickedButton = null;
+
+        Hover.Instance.Deactivate();
+        cancelField.SetActive(false);
+        ShowStats();
     }
 
 
@@ -270,6 +286,8 @@ public class GameManager : Singleton<GameManager>
         {
             Currency -= ClickedButton.Price;
             Hover.Instance.Deactivate();
+            cancelField.SetActive(false);
+            ShowStats();
         }
         
     }

@@ -36,16 +36,7 @@ public class PoisonTower : Tower
                              0.25f,         //TickDamage
                              0),        //SlowFactor
 
-            new TowerUpgrade(Price/2,   //Price
-                             1,         //Damage
-                             25,         //Range
-                             0,         //Attack cooldown
-                             1,         //Duration
-                             0,         //ProcChance
-                             0.25f,         //TickDamage
-                             0),        //SlowFactor
-
-            new TowerUpgrade(Price/2,   //Price
+            new TowerUpgrade(Price,   //Price
                              1,         //Damage
                              25,         //Range
                              0,         //Attack cooldown
@@ -58,9 +49,18 @@ public class PoisonTower : Tower
                              1,         //Damage
                              25,         //Range
                              0,         //Attack cooldown
-                             2,         //Duration
+                             1,         //Duration
                              0,         //ProcChance
                              0.25f,         //TickDamage
+                             0),        //SlowFactor
+
+            new TowerUpgrade(Price*2,   //Price
+                             1,         //Damage
+                             25,         //Range
+                             0,         //Attack cooldown
+                             2,         //Duration
+                             0,         //ProcChance
+                             0.5f,         //TickDamage
                              0),        //SlowFactor
         };
     }

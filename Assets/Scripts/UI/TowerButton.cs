@@ -22,17 +22,6 @@ public class TowerButton : MonoBehaviour
     }
 
     [SerializeField]
-    private Sprite sprite;
-
-    public Sprite Sprite
-    {
-        get
-        {
-            return sprite;
-        }
-    }
-
-    [SerializeField]
     private TextMeshProUGUI priceText;
 
 

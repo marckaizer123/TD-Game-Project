@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerType: Frost Tower
+  towerLevel: 1
   range: 350
   damage: 3
   attackCooldown: 1.3
