@@ -72,10 +72,4 @@ public class AudioManager : Singleton<AudioManager>
         sfxSlider.value = sfxSource.volume;
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -28,7 +28,7 @@ public class PoisonTower : Tower
         Upgrades = new TowerUpgrade[]
         {
             new TowerUpgrade(Price/2,   //Price
-                             1,         //Damage
+                             2,         //Damage
                              25,         //Range
                              0,         //Attack cooldown
                              1,         //Duration
@@ -37,7 +37,7 @@ public class PoisonTower : Tower
                              0),        //SlowFactor
 
             new TowerUpgrade(Price,   //Price
-                             1,         //Damage
+                             2,         //Damage
                              25,         //Range
                              0,         //Attack cooldown
                              1,         //Duration
@@ -46,7 +46,7 @@ public class PoisonTower : Tower
                              0),        //SlowFactor
 
             new TowerUpgrade(Price,   //Price
-                             1,         //Damage
+                             2,         //Damage
                              25,         //Range
                              0,         //Attack cooldown
                              1,         //Duration
@@ -55,7 +55,7 @@ public class PoisonTower : Tower
                              0),        //SlowFactor
 
             new TowerUpgrade(Price*2,   //Price
-                             1,         //Damage
+                             2,         //Damage
                              25,         //Range
                              0,         //Attack cooldown
                              2,         //Duration

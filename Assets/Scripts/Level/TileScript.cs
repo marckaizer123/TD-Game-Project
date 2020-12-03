@@ -1,8 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
+
+/// <summary>
+/// Tilescript holds all the behavior of a tile.
+/// </summary>
 public class TileScript : MonoBehaviour
 {
     public Point GridPosition { get; set; }
@@ -27,7 +29,22 @@ public class TileScript : MonoBehaviour
 
     public bool Walkable { get; set; }
 
-    public bool Debugging { get; set; }
+
+    public bool PointerOverGameOBject
+    {
+        get
+        {
+            if (EventSystem.current.IsPointerOverGameObject(-1) || EventSystem.current.IsPointerOverGameObject(0) || EventSystem.current.IsPointerOverGameObject(1) || EventSystem.current.IsPointerOverGameObject(2) || EventSystem.current.IsPointerOverGameObject(3))
+            {
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
+        }
+    }
 
 
     private Tower myTower;
@@ -80,7 +97,7 @@ public class TileScript : MonoBehaviour
     /// </summary>
     private void OnMouseOver()
     {
-        if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedButton != null)
+        if (!PointerOverGameOBject && GameManager.Instance.ClickedButton != null)
         {
             if (AllowsTower) // checks if the tile allows you to place the tower
             {
@@ -117,7 +134,7 @@ public class TileScript : MonoBehaviour
             }
         }
 
-        else if(EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedButton != null)
+        else if(PointerOverGameOBject && GameManager.Instance.ClickedButton != null)
         {
             if (Input.GetMouseButtonUp(0)) // cancels the placement of tower if drag is released on a tile already has a tower.
             {
@@ -125,7 +142,7 @@ public class TileScript : MonoBehaviour
             }
         }
 
-        else if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedButton == null && Input.GetMouseButtonDown(0))
+        else if (!PointerOverGameOBject && GameManager.Instance.ClickedButton == null && Input.GetMouseButtonDown(0))
         {
             if(myTower != null)
             {
@@ -136,21 +153,13 @@ public class TileScript : MonoBehaviour
                 GameManager.Instance.DeselectTower();
             }
         }
-
-
-        
     }
 
-    /// <summary>
-    /// Convert to touchscreen controls later.
-    /// </summary>
+
     private void OnMouseExit()
     {
-        if (!Debugging)
-        {
             ColorTile(Color.white);
-        }
-        
+
     }
 
     // Start is called before the first frame update
@@ -159,9 +168,4 @@ public class TileScript : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

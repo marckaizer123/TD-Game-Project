@@ -134,8 +134,7 @@ public class GameManager : Singleton<GameManager>
     public void StartWave()
     {
         wave++;
-
-        
+      
         waveSize++;
 
         if (wave % 3 == 0)
@@ -148,6 +147,11 @@ public class GameManager : Singleton<GameManager>
             waveSize += 2;
            
 
+        }
+
+        if (wave % 10 == 0)
+        {
+            waveSize += 2;
         }
 
         if (wave == 3)
@@ -171,12 +175,12 @@ public class GameManager : Singleton<GameManager>
             bonusHealth = 15;
         }
 
-        else if(wave % 10 == 0)
+        else if(wave % 8 == 0)
         {
             bonusHealth = 10;
         }
 
-        else if (wave % 5 == 0)
+        else if (wave % 4 == 0)
         {
             bonusHealth = 5;
         }
@@ -518,6 +522,7 @@ public class GameManager : Singleton<GameManager>
 
     public void MainMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
 

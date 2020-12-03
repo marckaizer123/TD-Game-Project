@@ -48,12 +48,6 @@ public class Monster : MonoBehaviour
             goldReward = value;
         }
     }
-
-    //public Dictionary<Point, TileScript> Tiles { get; set; }
-
-    //public Dictionary<Debuff, > newDebuff = new Dictionary<Debuff, bool>();
-
-
     private List<Debuff> newDebuffs = new List<Debuff>();
     private List<Debuff> debuffs = new List<Debuff>();
     private List<Debuff> expiredDebuffs = new List<Debuff>();
@@ -72,8 +66,6 @@ public class Monster : MonoBehaviour
             allowMovement = value;
         }
     }
-
-    
 
     public float MaxSpeed { get; set; }
 
@@ -96,9 +88,6 @@ public class Monster : MonoBehaviour
         //Check if the monster is allowed to move
         if (allowMovement)
         {
-            
-            //RotateMonster();
-
             transform.position = Vector3.MoveTowards(transform.position, destination, currentSpeed * Time.deltaTime);
 
             if (transform.position == destination)
@@ -155,7 +144,7 @@ public class Monster : MonoBehaviour
 
             GridPosition = path.Peek().GridPosition; // sets the new grid position of the monster.
 
-            Animate(GridPosition, path.Peek().GridPosition);
+            Animate(GridPosition, path.Peek().GridPosition); //calls the appropriate animation to be used depending on the direction the monster is moving.
 
             destination = path.Pop().WorldPosition; // as the monsters reach their destination, update the destination to the next worldposition in the queue.
         }
@@ -216,8 +205,6 @@ public class Monster : MonoBehaviour
 
     public void AddDebuff(Debuff debuff)
     {
-        
-        
         if(!debuffs.Exists(x => x.GetType() == debuff.GetType()) && !newDebuffs.Exists(x => x.GetType() == debuff.GetType())) // prevents same type of debuffs stacking
         {
             //Debuffs are first added to the list newDebuffs
@@ -248,7 +235,6 @@ public class Monster : MonoBehaviour
             newDebuffs.Clear();
         }
            
-
         foreach (Debuff debuff in debuffs)
         {
             debuff.Update();
@@ -318,8 +304,7 @@ public class Monster : MonoBehaviour
 
     private void Update()
     {
-        MoveMonster(); //calls the move monster function every tick.
-        HandleDebuffs();
-       
+        MoveMonster(); 
+        HandleDebuffs(); 
     }
 }

@@ -30,12 +30,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerType: Storm Tower
   towerLevel: 1
-  price: 150
+  price: 200
   range: 600
   damage: 20
-  attackCooldown: 3
+  attackCooldown: 2.5
   projectileType: Storm Bullet
-  projectileSpeed: 40
+  projectileSpeed: 50
   debuffType: Stun
   procChance: 15
   debuffDuration: 0.75

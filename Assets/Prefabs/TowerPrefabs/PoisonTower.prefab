@@ -111,17 +111,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerType: Poison Tower
   towerLevel: 1
-  price: 100
-  range: 350
-  damage: 5
-  attackCooldown: 1.2
+  price: 125
+  range: 300
+  damage: 4
+  attackCooldown: 1.5
   projectileType: Poison Bullet
   projectileSpeed: 12
   debuffType: Poison
   procChance: 100
   debuffDuration: 5
   tickTime: 0.25
-  tickDamage: 0.5
+  tickDamage: 1
 --- !u!1 &8421766778484969870
 GameObject:
   m_ObjectHideFlags: 0

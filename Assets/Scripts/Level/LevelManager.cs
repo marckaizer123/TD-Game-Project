@@ -80,6 +80,9 @@ public class LevelManager : Singleton<LevelManager>
         }  
     }
 
+    /// <summary>
+    /// Function that places the portals.
+    /// </summary>
     private void SpawnPortal()
     {
         startSpawn = new Point(1, 2);
@@ -98,6 +101,7 @@ public class LevelManager : Singleton<LevelManager>
 
         }
 
+        //Player cannot place a tower on the tiles that are covered by the goal portal.
         for (int x = -1; x <= 1; x++)
         {
             for (int y = 0; y <= 2; y++)
@@ -122,6 +126,10 @@ public class LevelManager : Singleton<LevelManager>
         GoalPortal.name = "Goal";
     }
 
+    /// <summary>
+    /// Reads the Level.txt file and convert it to an array of strings.
+    /// </summary>
+    /// <returns></returns>
     private string[] ReadLevelText()
     {
         TextAsset bindData = Resources.Load("Level") as TextAsset;
@@ -166,16 +174,15 @@ public class LevelManager : Singleton<LevelManager>
         }
 
 
-        minTile = Tiles[new Point(0, 0)].transform.position;
-        maxTile = Tiles[new Point(mapX - 1, mapY - 1)].transform.position;
+        minTile = Tiles[new Point(0, 0)].transform.position; // find the very first tile placed.
+        maxTile = Tiles[new Point(mapX - 1, mapY - 1)].transform.position; // find the very last tile placed.
 
 
+        moveCamera.SetMinLimits(new Vector3(minTile.x - TileSize, minTile.y + TileSize)); //sets the minimum limits of the camera using the first tile placed.
 
-        moveCamera.SetMinLimits(new Vector3(minTile.x - TileSize, minTile.y + TileSize));
+        moveCamera.SetMaxLimits(new Vector3(maxTile.x + 2*TileSize, maxTile.y - 2*TileSize, -10)); // sets the max limits of the camera using the last tile placed.
 
-        moveCamera.SetMaxLimits(new Vector3(maxTile.x + 2*TileSize, maxTile.y - 2*TileSize, -10));
-
-        SpawnPortal();
+        SpawnPortal(); // spawns th portals above the tiles.
     }
 
     public void GeneratePath()
@@ -183,19 +190,10 @@ public class LevelManager : Singleton<LevelManager>
         path = AStar.GetPath(startSpawn, goalSpawn);
     }
 
-
-    
-
     // Start is called before the first frame update
     void Start()
     {
         createLevel(); 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     

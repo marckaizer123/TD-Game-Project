@@ -8,8 +8,6 @@ public static class AStar
     //Dictionary that will contain nodes.
     private static Dictionary<Point, Node> nodes;
 
-
-
     /// <summary>
     /// Creates a node for each TileScript and adds them to the dictionary.
     /// </summary>
@@ -104,9 +102,6 @@ public static class AStar
         }
 
         return finalPath;
-
-        //For debugging only, remove later
-        //GameObject.Find("Debugger").GetComponent<Debugger>().DebugPath(openList, closedList, finalPath);
 
     }
 }

@@ -14,8 +14,6 @@ public class PoisonDebuff : Debuff
         this.tickDamage = tickDamage;
         this.tickTime = tickTime;
     }
-
-
     public override void Update()
     {
         if (target != null)

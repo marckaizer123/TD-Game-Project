@@ -45,17 +45,37 @@ public class TowerButton : MonoBehaviour
         GameManager.Instance.CurrencyChange += new CurrencyChanged(PriceCheck);
     }
 
+    private void Update()
+    {
+        WaveCheck();
+    }
+
     /// <summary>
     /// Compares the price of a tower against the currency of the player. Towers that cannot be bought will have their buttons greyed out.
     /// </summary>
     private void PriceCheck()
     {
+
         if (tower.Price <= GameManager.Instance.Currency)
         {
             GetComponent<Image>().color = Color.white;
             priceText.color = new Color(233, 243, 0);
 
         }
+        else
+        {
+            GetComponent<Image>().color = Color.grey;
+            priceText.color = Color.grey;
+        }
+    }
+
+    private void WaveCheck()
+    {
+        if (!GameManager.Instance.waveIsActive)
+        {
+            PriceCheck();
+        }
+
         else
         {
             GetComponent<Image>().color = Color.grey;

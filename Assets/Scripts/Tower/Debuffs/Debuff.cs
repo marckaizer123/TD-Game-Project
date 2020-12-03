@@ -26,7 +26,6 @@ public abstract class Debuff
             Remove();
         }
     }
-
     public virtual void Remove()
     {
         if (target != null)

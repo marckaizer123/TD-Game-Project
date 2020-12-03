@@ -15,7 +15,6 @@ public class Projectile : MonoBehaviour
         this.target = parent.Target;
     }
 
-
     private void FollowTarget()
     {
         //projectile only moves when there is a target and the target is active.
@@ -48,12 +47,10 @@ public class Projectile : MonoBehaviour
             {
                 target.TakeDamage(parent.Damage);
 
-                ApplyDebuff();
-                
+                ApplyDebuff();     
             }
 
-            GameManager.Instance.Pool.ReleaseObject(gameObject);
-            
+            GameManager.Instance.Pool.ReleaseObject(gameObject);          
         }
     }
 
@@ -64,15 +61,7 @@ public class Projectile : MonoBehaviour
         if (roll < parent.ProcChance)
         {
             target.AddDebuff((parent.GetDebuff()));
-        }
-
-        
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        }   
     }
 
     // Update is called once per frame

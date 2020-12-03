@@ -25,10 +25,7 @@ public class FrostDebuff : Debuff
                 target.CurrentSpeed = target.MaxSpeed * slowFactor / 100;
             }
         }
-
         base.Update();
-
-
     }
 
     public override void Remove()
@@ -36,5 +33,4 @@ public class FrostDebuff : Debuff
         target.CurrentSpeed = target.MaxSpeed;     
         base.Remove();
     }
-
 }

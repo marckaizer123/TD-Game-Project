@@ -75,7 +75,6 @@ public class FrostTower : Tower
                              "</color>",
                              base.SetTooltip(),
                              slowFactor);
-
     }
 
     public override void Upgrade()

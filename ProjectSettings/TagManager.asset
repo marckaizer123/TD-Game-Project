@@ -8,6 +8,7 @@ TagManager:
   - Goal
   - Monster
   - Tile
+  - Cancel
   layers:
   - Default
   - TransparentFX

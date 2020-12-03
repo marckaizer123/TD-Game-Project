@@ -28,36 +28,36 @@ public class FireTower : Tower
         Upgrades = new TowerUpgrade[]
         {
             new TowerUpgrade(Price/2,   //Price
-                             2,         //Damage
-                             0,         //Range
+                             1,         //Damage
+                             25,         //Range
                              0,         //Attack cooldown
                              0,         //Duration
-                             5,         //ProcChance
+                             10,         //ProcChance
                              2,         //TickDamage
                              0),        //SlowFactor
 
             new TowerUpgrade(Price,   //Price
                              2,         //Damage
-                             0,         //Range
-                             0,         //Attack cooldown
+                             25,         //Range
+                             0.1f,         //Attack cooldown
                              0,         //Duration
-                             5,         //ProcChance
-                             2,         //TickDamage
+                             10,         //ProcChance
+                             4,         //TickDamage
                              0),        //SlowFactor
 
             new TowerUpgrade(Price,   //Price
                              2,         //Damage
-                             50,         //Range
-                             0,         //Attack cooldown
+                             25,         //Range
+                             0.1f,         //Attack cooldown
                              0,         //Duration
-                             5,         //ProcChance
-                             2,         //TickDamage
+                             10,         //ProcChance
+                             4,         //TickDamage
                              0),        //SlowFactor
 
             new TowerUpgrade(Price*2,   //Price
-                             4,         //Damage
-                             100,         //Range
-                             0.5f,         //Attack cooldown
+                             2,         //Damage
+                             50,         //Range
+                             0.2f,         //Attack cooldown
                              0,         //Duration
                              10,         //ProcChance
                              4,         //TickDamage

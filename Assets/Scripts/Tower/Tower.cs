@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
-
 /// <summary>
 /// This will be inherited by the more specialized tower types.
 /// </summary>
@@ -367,10 +365,6 @@ public abstract class Tower : MonoBehaviour
                 canAttack = false;
             }
         }
-
-
-
-
     }
 
     /// <summary>
@@ -388,11 +382,6 @@ public abstract class Tower : MonoBehaviour
         //pass the tower to the initialize function in the projectile class.
         projectile.Initialize(this);
     }
-
-
-    
-
-    
 
     // Update is called once per frame
     void Update()

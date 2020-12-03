@@ -63,11 +63,11 @@ MonoBehaviour:
   towerType: Fire Tower
   towerLevel: 1
   price: 50
-  range: 350
+  range: 275
   damage: 5
-  attackCooldown: 1
+  attackCooldown: 1.1
   projectileType: Fire Bullet
-  projectileSpeed: 12
+  projectileSpeed: 13
   debuffType: Burn
   procChance: 20
   debuffDuration: 1.5

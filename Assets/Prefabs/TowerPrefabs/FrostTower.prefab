@@ -63,14 +63,14 @@ MonoBehaviour:
   towerType: Frost Tower
   towerLevel: 1
   price: 75
-  range: 350
+  range: 300
   damage: 3
   attackCooldown: 1.5
   projectileType: Frost Bullet
-  projectileSpeed: 15
+  projectileSpeed: 13
   debuffType: Slow
   procChance: 100
-  debuffDuration: 4
+  debuffDuration: 3
   slowFactor: 20
 --- !u!1 &6871508992387368369
 GameObject:
